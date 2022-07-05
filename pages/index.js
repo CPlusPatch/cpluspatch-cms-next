@@ -1,10 +1,19 @@
 import Image from 'next/future/image'
 import mainHero from "../public/static/banner.png";
-import Navbar from '../components/nav/navbar'
+import Navbar from '../components/nav/navbar';
+import firebaseLogo from '../public/static/firebase.svg';
+import nextJsLogo from '../public/static/nextjs.svg';
+import vercelLogo from '../public/static/vercel.svg';
+import githubLogo from '../public/static/github.svg';
+import tailwindLogo from '../public/static/tailwindcss.svg';
+import Head from 'next/head';
 
 export default function Example() {
 	return (
 		<div className="bg-gray-50 font-['Exo_2']">
+			<Head>
+				<title>Welcome! &middot; CPlusPatch 2022</title>
+			</Head>
 			<div className="relative">
 				<div
 					className="absolute inset-y-0 h-full w-full"
@@ -116,37 +125,39 @@ export default function Example() {
 					</h2>
 					<div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
 						<div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1 items-center">
-							<img
+							<Image
 								className="h-12"
-								src="/static/firebase.svg"
+								src={firebaseLogo}
 								alt="Google Firebase"
 							/>
 						</div>
 						<div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1 items-center">
-							<img
+							<Image
 								className="h-16"
-								src="/static/nextjs.svg"
+								src={nextJsLogo}
 								alt="Next.js"
 							/>
 						</div>
 						<div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1 items-center">
-							<img
+							<Image
 								className="h-10"
-								src="/static/vercel.svg"
+								src={vercelLogo}
 								alt="Vercel"
 							/>
 						</div>
 						<div className="col-span-1 flex justify-center md:col-span-3 lg:col-span-1 items-center">
-							<img
+							<Image
 								className="h-6"
-								src="/static/github.svg"
+								src={githubLogo}
 								alt="GitHub"
+								width={88}
+								height={24}
 							/>
 						</div>
 						<div className="col-span-2 flex justify-center md:col-span-3 lg:col-span-1 items-center">
-							<img
+							<Image
 								className="h-7"
-								src="/static/tailwindcss.svg"
+								src={tailwindLogo}
 								alt="TailwindCSS"
 							/>
 						</div>
