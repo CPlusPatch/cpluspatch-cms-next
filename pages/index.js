@@ -14,7 +14,8 @@ export default function Example() {
 			<Head>
 				<title>Welcome! &middot; CPlusPatch 2022</title>
 			</Head>
-			<div className="relative">
+			<Navbar />
+			<div className="relative overflow-hidden">
 				<div
 					className="absolute inset-y-0 h-full w-full"
 					aria-hidden="true">
@@ -82,7 +83,6 @@ export default function Example() {
 					</div>
 				</div>
 
-				<Navbar />
 				<div className="relative pb-16 sm:pb-24">
 					<div className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 sm:px-6 font-['Exo_2']">
 						<div className="text-left">
