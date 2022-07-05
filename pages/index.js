@@ -1,12 +1,5 @@
-import Head from 'next/head'
 import Image from 'next/future/image'
-import Footer from '../components/footer/footer'
-import LanguagePresentation from '../components/landing/language-presentation'
-import Projects from '../components/landing/projects'
-import ServerExperience from '../components/landing/server-experience'
-import Splash from '../components/landing/splash'
-import Header from '../components/nav/navbar'
-
+import mainHero from "../public/static/banner.png";
 import Navbar from '../components/nav/navbar'
 
 export default function Example() {
@@ -108,8 +101,10 @@ export default function Example() {
 					<div className="max-w-7xl mx-auto px-4 sm:px-6">
 						<Image
 							className="relative rounded-lg shadow-lg"
-							src="/static/banner.png"
+							src={mainHero}
 							alt="VSCode screenshot"
+							priority="true"
+							placeholder='blur'
 						/>
 					</div>
 				</div>
