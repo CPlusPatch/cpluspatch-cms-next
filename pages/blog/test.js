@@ -20,7 +20,7 @@ function DemoArticle() {
 								CompensationVR 1.4.0, out now!
 							</h1>
 						</div>
-						<div className="overflow-hidden rounded-lg aspect-w-16 aspect-h-9">
+						<div className="overflow-hidden md:rounded-lg aspect-w-16 aspect-h-9">
 							<img src="https://res.cloudinary.com/braydoncoyer/image/upload/v1636418215/learn_tailwindplay_banner.jpg" />
 						</div>
 						<div className="w-full h-full px-4 mt-10">
