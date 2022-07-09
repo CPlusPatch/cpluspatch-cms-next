@@ -10,8 +10,8 @@ function DemoArticle({ title, blocks, datePublished }) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
-				<title>Test DemoArticle! &middot; CPlusPatch 2022</title>
-				<meta property="og:title" content="Example title" />
+				<title>{title} &middot; CPlusPatch 2022</title>
+				<meta property="og:title" content={title} />
 			</Head>
 			<Navbar />
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
@@ -46,12 +46,15 @@ function Aside() {
 					<div className="px-4 mt-6 sm:mt-8 sm:flex sm:items-end sm:px-6">
 						<div className="sm:flex-1">
 							<div>
-								<div className="flex items-center">
+								<div className="flex items-center -ml-2">
 									<div>
-										<img
+										<Image
 											className="inline-block rounded-lg h-14 w-14"
-											src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+											src="/static/logo.jpg"
 											alt=""
+											width={70}
+											height={70}
+											quality={100}
 										/>
 									</div>
 									<div className="ml-3">

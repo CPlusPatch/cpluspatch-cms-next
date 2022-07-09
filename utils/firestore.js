@@ -21,18 +21,19 @@ const methods = {
 	app: app,
 	db: db,
 	postsRef: postsRef,
-	getPosts: async (extraQuery = false) => { // TODO: Update to the Firebase Admin SDK
-		const q = extraQuery ? query(collection(db, 'posts'), extraQuery, orderBy("dateCreated", "desc")) : query(collection(db, 'posts'), orderBy("dateCreated", "desc"));
+	getPosts: async (fields = false) => {
 		let posts = [];
-
-		const querySnapshot = await getDocs(q);
-		querySnapshot.forEach((doc) => {
+		let data = fields ? 
+			await postsRef.where(...fields).orderBy("dateCreated", "desc").get() :
+			await postsRef.orderBy("dateCreated", "desc").get();
+		
+		data.forEach((doc) => {
 			posts.push({
 				id: doc.id,
 				data: doc.data()
 			});
 		});
-		return posts;
+		return posts ?? false;
 	},
 	getPostByFields: async (...fields) => {
 		let posts = [];
@@ -45,13 +46,46 @@ const methods = {
 		});
 		return posts ?? false;
 	},
-	setPostField: async (id, field, value) => { // TODO: Update to the Firebase Admin SDK
-		return await setDoc(doc(collection(db, 'posts'), id), {
-			[field]: value
-		}, { merge: true });
+	getPostById: async (id) => {
+		try {
+			let data = await postsRef.doc(id).get();
+			let post = {
+				id: data.id,
+				data: data.data()
+			};
+
+			return post;
+		} catch (error) {
+			console.log(error)
+			return false;
+		}
 	},
-	addPost: async (data) => { // TODO: Update to the Firebase Admin SDK
-		await setDoc(doc(collection(db, 'posts')), data);
+	setPostField: async (id, field, value) => {
+		try {
+			let data = await postsRef.doc(id).update({
+				[field]: value
+			});
+			return data;
+		} catch {
+			return false;
+		}
+	},
+	updatePost: async (id, data) => {
+		try {
+			let res = await postsRef.doc(id).update(data);
+			return res;
+		} catch (e) {
+			console.error(e);
+			return false;
+		}
+	},
+	addPost: async (data) => {
+		try {
+			return (await postsRef.add(data));
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
 	},
 }
 export default methods;
