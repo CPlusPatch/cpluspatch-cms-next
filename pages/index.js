@@ -30,6 +30,7 @@ import laravel from '../public/static/languages/laravel.png';
 import git from '../public/static/languages/git.png';
 import jquery from '../public/static/languages/jquery.png';
 import npm from '../public/static/languages/npm.webp';
+import Footer from '../components/footer/footer';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
@@ -178,10 +179,6 @@ const faqs = [
 	{
 		question: "What's your favorite way to learn?",
 		answer: "I like to learn by doing, so basically thinking of a project and reading docs or guides until I figure it out.",
-	},
-	{
-		question: "How can I contact you?",
-		answer: <span className="text-blue-500 underline"><Link href="/contact"><a href="#">Here is my contact page</a></Link></span>,
 	},
 ];
 
@@ -344,6 +341,7 @@ export default function Landing() {
 			<Languages/>
 			<Faqs/>
 			<ContactHeader/>
+			<Footer/>
 		</div>
 	);
 }
@@ -460,11 +458,10 @@ function ContactHeader() {
 			</h2>
 			<div className="flex mt-8 lg:mt-0 lg:flex-shrink-0">
 				<div className="inline-flex rounded-md shadow">
-					<a
-						href="#"
+					<button
 						className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-white duration-200 bg-indigo-600 border border-transparent rounded-md hover:scale-105 hover:bg-indigo-700">
-						Contact me
-					</a>
+						Literally just scroll down
+					</button>
 				</div>
 			</div>
 		</div>
