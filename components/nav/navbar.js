@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { SearchIcon } from '@heroicons/react/solid';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import Image from "next/future/image";
+import Link from 'next/link';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -30,11 +31,13 @@ export default function Navbar() {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<a
-										href="#"
-										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-										Blog
-									</a>
+									<Link href={"/blog"}>
+										<a
+											href="#"
+											className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
+											Blog
+										</a>
+									</Link>
 									<a
 										href="#"
 										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">

@@ -20,7 +20,6 @@ function Editor({ id }) {
 			title: false
 		}
 	});
-	var editor = false
 
 	useEffect(() => {
 		async function fetchData() {
@@ -34,7 +33,7 @@ function Editor({ id }) {
 			const CodeTool = (await import('@editorjs/code')).default;
 			const List = (await import('@editorjs/list')).default;
 
-			editor = new EditorJS({
+			new EditorJS({
 				holder: 'editor',
 				tools: {
 					list: {
@@ -54,14 +53,15 @@ function Editor({ id }) {
 			});
 		}
 
-		if (typeof window !== "undefined" && editor === false) {
+		if (typeof window !== "undefined") {
 			fetchData();
 		}
-	}, [editor]);
+	});
 
 	// Runs every time the editor is saved
 	// @Param {Object} editor - Editor object received from the editor
 	const saveData = async () => {
+		console.log("Saving data");
 		const res = await (await window.fetch(`/api/post/${id}`, {
 			method: "PUT",
 			body: JSON.stringify(post),

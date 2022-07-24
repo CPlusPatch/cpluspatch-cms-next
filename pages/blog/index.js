@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Navbar from '../../components/nav/navbar';
 import firestore from "../../utils/firestore";
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { ChevronRightIcon } from '@heroicons/react/outline';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
@@ -36,14 +38,21 @@ function Main({ posts }) {
 											</span>
 										</a>
 									</div>
-									<a href={`/blog/${post.data.slug}`} className="block mt-4">
-										<p className="text-xl font-semibold text-gray-900">
-											{post.data.title}
-										</p>
-										<p className="mt-3 text-base text-gray-500">
-											{post.data.description}
-										</p>
-									</a>
+									<Link href={`/blog/${post.data.slug}`}>
+										<a className="block mt-4">
+											<p className="text-xl font-semibold text-gray-900">
+												{post.data.title}
+											</p>
+											<p className="mt-3 text-base text-gray-500">
+												{post.data.description}
+											</p>
+										</a>
+									</Link>
+									<Link href={`/editor/${post.id}`}>
+										<a className="block mt-4">
+											Edit <ChevronRightIcon className="inline w-3 h-3"/>
+										</a>
+									</Link>
 									<div className="flex items-center mt-6">
 										<div className="flex-shrink-0">
 											<a href="#">
