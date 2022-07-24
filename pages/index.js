@@ -204,7 +204,7 @@ function Languages() {
 								<div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
 									<div className="aspect-1">
 										<Image className="object-cover rounded-lg shadow-lg" src={item.image} width={250} height={250} alt="" />
-									</div>
+									</div>Ad
 									<div className="sm:col-span-2">
 										<div className="space-y-4">
 											<div className="space-y-1 text-lg font-medium leading-6">
