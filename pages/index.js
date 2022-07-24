@@ -15,6 +15,17 @@ import react from '../public/static/languages/react.png';
 import css from '../public/static/languages/css.png';
 import html from '../public/static/languages/html.png';
 import firebase from '../public/static/languages/firebase.png';
+import nextJs from '../public/static/languages/nextjs.png';
+import vercel from '../public/static/languages/vercel.png';
+import tailwindcss from '../public/static/languages/tailwindcss.jpg';
+import github from '../public/static/languages/github.jpg';
+import python from '../public/static/languages/python.png';
+import discord from '../public/static/languages/discord.png';
+import php from '../public/static/languages/php.png';
+import laravel from '../public/static/languages/laravel.png';
+import git from '../public/static/languages/git.png';
+import jquery from '../public/static/languages/jquery.png';
+import npm from '../public/static/languages/npm.webp';
 
 const languages = [
 	{
@@ -51,7 +62,84 @@ const languages = [
 		description: 'Firebase is a cloud-based mobile and web app platform designed to help developers build apps faster. It is based on Google\'s JavaScript engine, AngularJS, and Google\'s open source cloud database, Firebase Realtime Database.',
 		experience: "One year",
 		image: firebase,
-	}
+	},
+	{
+		name: 'Node.js',
+		type: 'Runtime',
+		description: 'Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code server-side. Node.js lets developers use JavaScript to write command line tools and for server-side scripting.',
+		experience: "Three years",
+		image: npm,
+	},
+	{
+		name: "Next.js",
+		type: "Framework",
+		description: "Next.js is a React framework for server-rendered applications. It is based on React and uses React Router to handle client-side routing. It is widely used for its performance and SEO benefits.",
+		experience: "A few months",
+		image: nextJs,
+	},
+	{
+		name: "Vercel",
+		type: "Framework",
+		description: "Vercel is a cloud platform for building and deploying websites. It is widely used for development because of its fast and secure CI/CD pipeline.",
+		experience: "A few months",
+		image: vercel,
+	},
+	{
+		name: "TailwindCSS",
+		type: "Framework",
+		description: "Tailwind CSS is a utility-first CSS framework for rapid UI development. It is designed for use with React and React Native.",
+		experience: "One year",
+		image: tailwindcss,
+	},
+	{
+		name: "Github",
+		type: "Tool",
+		description: "Github is a web-based Git repository hosting service, used for version control and code collaboration. It is developed by GitHub, Inc. (owned by Microsoft)",
+		experience: "Four years",
+		image: github,
+	},
+	{
+		name: "Python",
+		type: "Language",
+		description: "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace.",
+		experience: "Six years",
+		image: python,
+	},
+	{
+		name: "Discord.js",
+		type: "Framework",
+		description: "Discord.js is a JavaScript library for building rich and interactive chat applications. It is based on the Discord API and uses websockets to communicate with the Discord servers.",
+		experience: "One year",
+		image: discord,
+	},
+	{
+		name: "PHP",
+		type: "Language",
+		description: "PHP is a server-side scripting language designed for web development but also used as a general-purpose programming language. PHP is a popular general-purpose programming language originally created by Rasmus Lerdorf in 1994.",
+		experience: "Four years",
+		image: php,
+	},
+	{
+		name: "Laravel",
+		type: "Framework",
+		description: "Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern.",
+		experience: "Three years",
+		image: laravel,
+	},
+	{
+		name: "Git",
+		type: "Tool",
+		description: "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.",
+		experience: "Four years",
+		image: git,
+	},
+	{
+		name: "JQuery",
+		type: "Framework",
+		description: "JQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy to use API that works across a multitude of browsers.",
+		experience: "Four years",
+		image: jquery,
+	},
 ]
 
 export default function Landing() {
@@ -235,7 +323,7 @@ function Languages() {
 							<li key={item.name} className="sm:py-8">
 								<div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
 									<div className="aspect-1">
-										<Image className="object-cover rounded-lg shadow-lg" src={item.image} width={250} height={250} alt="" />
+										<Image className="object-cover rounded-lg shadow-lg" src={item.image} alt="" />
 									</div>
 									<div className="sm:col-span-2">
 										<div className="space-y-4">
