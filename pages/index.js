@@ -1,4 +1,9 @@
 import Image from 'next/future/image'
+import { Disclosure } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/outline'
+import Head from 'next/head';
+import Link from 'next/link';
+
 import mainHero from "../public/static/banner.png";
 import Navbar from '../components/nav/navbar';
 import firebaseLogo from '../public/static/firebase.svg';
@@ -6,7 +11,6 @@ import nextJsLogo from '../public/static/nextjs.svg';
 import vercelLogo from '../public/static/vercel.svg';
 import githubLogo from '../public/static/github.svg';
 import tailwindLogo from '../public/static/tailwindcss.svg';
-import Head from 'next/head';
 
 // Languages & Frameworks images
 
@@ -26,6 +30,10 @@ import laravel from '../public/static/languages/laravel.png';
 import git from '../public/static/languages/git.png';
 import jquery from '../public/static/languages/jquery.png';
 import npm from '../public/static/languages/npm.webp';
+
+function classNames(...classes) {
+	return classes.filter(Boolean).join(' ')
+}
 
 const languages = [
 	{
@@ -140,7 +148,42 @@ const languages = [
 		experience: "Four years",
 		image: jquery,
 	},
-]
+];
+
+const faqs = [
+	{
+		question: "How did you learn to code?",
+		answer: <>
+			I&apos;m a self taught developer, which means I learnt everything I know by being curious and reading docs. I started with Python, HTML and CSS and then moved on to JavaScript.
+			<br/><br/>
+			After that, I went on to use PHP + MySQL, which led me to Laravel: I then learnt how to use React + Firebase, which led me to Next.js. In the process, I learnt how to use Git, and how to use JQuery. I also got sick of Bootstrap along the way and found out about TailwindCSS, which I use on everything nowadays
+		</>,
+	},
+	{
+		question: "What's your favorite language + framework combination?",
+		answer: "Definitely Next.js + TailwindCSS + Firebase, plus Node for backends.",
+	},
+	{
+		question: "What's your favorite IDE?",
+		answer: "Visual Studio Code is by far the best IDE I have used. It supports every language and framework thanks to extensions, and it has a great UI.",
+	},
+	{
+		question: "What do you do for a living?",
+		answer: "I'm currently a student coding as a side hobby, and learning new things along the way!"
+	},
+	{
+		question: "What advice would you give to new developers?",
+		answer: "Definitely give Firebase a shot, and try to learn as much as you can. Being able to use GitHub's CI/CD pipeline efficiently is a skill that I think every developer should have: and remember, when you have an issue, the community is always here to help."
+	},
+	{
+		question: "What's your favorite way to learn?",
+		answer: "I like to learn by doing, so basically thinking of a project and reading docs or guides until I figure it out.",
+	},
+	{
+		question: "How can I contact you?",
+		answer: <span className="text-blue-500 underline"><Link href="/contact"><a href="#">Here is my contact page</a></Link></span>,
+	},
+];
 
 export default function Landing() {
 	return (
@@ -299,6 +342,7 @@ export default function Landing() {
 				</div>
 			</div>
 			<Languages/>
+			<Faqs/>
 			<ContactHeader/>
 		</div>
 	);
@@ -347,6 +391,58 @@ function Languages() {
 							))}
 						</ul>
 					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function Faqs() {
+	return (
+		<div className="bg-gray-50">
+			<div className="px-4 py-12 mx-auto max-w-7xl sm:py-16 sm:px-6 lg:px-8">
+				<div className="max-w-3xl mx-auto divide-y-2 divide-gray-200">
+					<h2 className="text-3xl font-extrabold text-center text-gray-900 sm:text-4xl">
+						Frequently asked questions
+					</h2>
+					<dl className="mt-6 space-y-6 divide-y divide-gray-200">
+						{faqs.map((faq) => (
+							<Disclosure
+								as="div"
+								key={faq.question}
+								className="pt-6">
+								{({ open }) => (
+									<>
+										<dt className="text-lg">
+											<Disclosure.Button className="flex items-start justify-between w-full text-left text-gray-400">
+												<span className="font-medium text-gray-900">
+													{faq.question}
+												</span>
+												<span className="flex items-center ml-6 h-7">
+													<ChevronDownIcon
+														className={classNames(
+															open
+																? "-rotate-180"
+																: "rotate-0",
+															"h-6 w-6 transform"
+														)}
+														aria-hidden="true"
+													/>
+												</span>
+											</Disclosure.Button>
+										</dt>
+										<Disclosure.Panel
+											as="dd"
+											className="pr-12 mt-2">
+											<p className="text-base text-gray-500">
+												{faq.answer}
+											</p>
+										</Disclosure.Panel>
+									</>
+								)}
+							</Disclosure>
+						))}
+					</dl>
 				</div>
 			</div>
 		</div>

@@ -48,11 +48,13 @@ export default function Navbar() {
 										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
 										About
 									</a>
-									<a
-										href="#"
-										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-										Contact
-									</a>
+									<Link href={"/contact"}>
+										<a
+											href="#"
+											className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
+											Contact
+										</a>
+									</Link>
 								</div>
 							</div>
 							<div className="flex items-center justify-center flex-1 px-2 lg:ml-6 lg:justify-end">
