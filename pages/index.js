@@ -365,7 +365,7 @@ function Languages() {
 							<li key={item.name} className="sm:py-8">
 								<div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
 									<div className="aspect-1">
-										<Image className="object-cover rounded-lg shadow-lg" src={item.image} alt="" />
+										<Image className="object-cover rounded-lg shadow-lg" src={item.image} alt="" placeholder='blur'/>
 									</div>
 									<div className="sm:col-span-2">
 										<div className="space-y-4">

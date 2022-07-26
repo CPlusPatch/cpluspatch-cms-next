@@ -5,6 +5,8 @@ import firestore from "../../utils/firestore";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/outline';
+import { authOptions } from '../api/auth/[...nextauth]';
+import { unstable_getServerSession } from "next-auth/next"
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
@@ -14,7 +16,7 @@ function Main({ posts }) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
-				<title>Test DemoArticle! &middot; CPlusPatch 2022</title>
+				<title>Posts &middot; CPlusPatch</title>
 				<meta property="og:title" content="Example title" />
 			</Head>
 			<Navbar />
@@ -125,8 +127,12 @@ function Header() {
 	)
 }
 
-export const getServerSideProps = async () => {
-	let posts = await firestore.getPosts();
+export async function getServerSideProps(context) {
+	const session = await unstable_getServerSession(context.req, context.res, authOptions);
+	console.log(session);
+	
+	let posts = (session && (session.user.admin ?? false)) ? await firestore.getPosts() :
+					await firestore.getPosts(["public", "==", true]);
 	return {
 		props: {
 			posts: posts

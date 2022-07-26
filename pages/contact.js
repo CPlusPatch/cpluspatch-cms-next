@@ -1,16 +1,19 @@
-import Image from 'next/future/image'
-import Head from 'next/head';
+import { useSession, signIn, signOut } from "next-auth/react"
 
-import Navbar from '../components/nav/navbar';
-
-
-export default function Landing() {
-	return (
-		<div className="bg-gray-50 font-['Exo_2']">
-			<Head>
-				<title>Contact me &middot; CPlusPatch</title>
-			</Head>
-			<Navbar />
-		</div>
-	);
+export default function Component() {
+  const { data: session } = useSession()
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
+  )
 }
