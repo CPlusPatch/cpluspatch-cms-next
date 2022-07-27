@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { unstable_getServerSession } from "next-auth/next"
+import Image from 'next/future/image';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
@@ -61,10 +62,13 @@ function Main({ posts }) {
 												<span className="sr-only">
 													CPlusPatch
 												</span>
-												<img
-													className="w-10 h-10 rounded-full"
-													src="/static/logo.jpg"
+												<Image
+													className="w-10 h-10 rounded-md"
+													src="/static/logo.png"
 													alt=""
+													width={40}
+													height={40}
+													quality={100}
 												/>
 											</a>
 										</div>
@@ -129,7 +133,6 @@ function Header() {
 
 export async function getServerSideProps(context) {
 	const session = await unstable_getServerSession(context.req, context.res, authOptions);
-	console.log(session);
 	
 	let posts = (session && (session.user.admin ?? false)) ? await firestore.getPosts() :
 					await firestore.getPosts(["public", "==", true]);

@@ -98,7 +98,7 @@ export default function Navbar() {
 								</Disclosure.Button>
 							</div>
 							<div className="hidden lg:ml-4 lg:flex lg:items-center">
-								<button
+								{/* <button
 									type="button"
 									className="flex-shrink-0 p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 									<span className="sr-only">
@@ -108,20 +108,20 @@ export default function Navbar() {
 										className="w-6 h-6"
 										aria-hidden="true"
 									/>
-								</button>
+								</button> */}
 
 								{/* Profile dropdown */}
 								<Menu
 									as="div"
 									className="relative flex-shrink-0 ml-4">
 									<div>
-										<Menu.Button className="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 											<span className="sr-only">
 												Open user menu
 											</span>
 											<Image
-												className="w-8 h-8 rounded-full"
-												src="/static/logo.jpg"
+												className="w-8 h-8 rounded-md"
+												src="/static/logo.png"
 												alt=""
 												width={32}
 												height={32}

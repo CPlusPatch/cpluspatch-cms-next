@@ -56,7 +56,7 @@ function Editor({ id }) {
 		if (typeof window !== "undefined") {
 			fetchData();
 		}
-	});
+	}, [id]);
 
 	// Runs every time the editor is saved
 	// @Param {Object} editor - Editor object received from the editor
@@ -67,7 +67,6 @@ function Editor({ id }) {
 			body: JSON.stringify(post),
     		headers: { 'Content-Type': 'application/json' }
 		})).json();
-		console.log(res);
 	}
 
 	return (

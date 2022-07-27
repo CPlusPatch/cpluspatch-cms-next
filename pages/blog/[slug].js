@@ -50,7 +50,7 @@ function Aside() {
 									<div>
 										<Image
 											className="inline-block rounded-lg h-14 w-14"
-											src="/static/logo.jpg"
+											src="/static/logo.png"
 											alt=""
 											width={70}
 											height={70}
