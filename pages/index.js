@@ -3,6 +3,8 @@ import { Disclosure } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import Head from 'next/head';
 import Link from 'next/link';
+import { authOptions } from './api/auth/[...nextauth]';
+import { unstable_getServerSession } from "next-auth/next";
 
 import mainHero from "../public/static/banner.png";
 import Navbar from '../components/nav/navbar';
@@ -182,13 +184,13 @@ const faqs = [
 	},
 ];
 
-export default function Landing() {
+export default function Landing({ user }) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2']">
 			<Head>
 				<title>Welcome! &middot; CPlusPatch 2022</title>
 			</Head>
-			<Navbar />
+			<Navbar user={user}/>
 			<div className="relative overflow-hidden">
 				<div
 					className="absolute inset-y-0 w-full h-full"
@@ -466,4 +468,14 @@ function ContactHeader() {
 			</div>
 		</div>
 	);
+}
+
+export async function getServerSideProps(context) {
+	const session = await unstable_getServerSession(context.req, context.res, authOptions);
+	
+	return {
+		props: {
+			user: session ? session.user : false,
+		}
+	};
 }

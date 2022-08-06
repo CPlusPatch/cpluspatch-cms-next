@@ -14,7 +14,6 @@ function classNames(...classes) {
 }
 
 function Main({ posts, user, isAdmin }) {
-	console.log(user);
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
