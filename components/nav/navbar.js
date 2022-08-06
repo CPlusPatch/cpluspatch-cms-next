@@ -34,11 +34,18 @@ function Navbar({ user }) {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									<a
-										href="#socials"
-										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-										Contact
-									</a>
+									<Link href={"/#socials"}>
+										<a
+											className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
+											Contact
+										</a>
+									</Link>
+									<Link href={"/blog"}>
+										<a
+											className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
+											Blog
+										</a>
+									</Link>
 								</div>
 							</div>
 							<div className="flex items-center justify-center flex-1 px-2 lg:ml-6 lg:justify-end">
@@ -224,30 +231,18 @@ function Navbar({ user }) {
 					<Disclosure.Panel className="lg:hidden">
 						<div className="pt-2 pb-3 space-y-1">
 							{/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-							{/* <Disclosure.Button
+							<Disclosure.Button
 								as="a"
-								href="#"
+								href="/#socials"
 								className="block py-2 pl-3 pr-4 text-base font-medium text-indigo-700 border-l-4 border-indigo-500 bg-indigo-50">
-								Dashboard
+								Contact
 							</Disclosure.Button>
 							<Disclosure.Button
 								as="a"
-								href="#"
+								href="/blog"
 								className="block py-2 pl-3 pr-4 text-base font-medium text-gray-600 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
-								Team
+								Blog
 							</Disclosure.Button>
-							<Disclosure.Button
-								as="a"
-								href="#"
-								className="block py-2 pl-3 pr-4 text-base font-medium text-gray-600 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
-								Projects
-							</Disclosure.Button>
-							<Disclosure.Button
-								as="a"
-								href="#"
-								className="block py-2 pl-3 pr-4 text-base font-medium text-gray-600 border-l-4 border-transparent hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">
-								Calendar
-							</Disclosure.Button>*/}
 						</div>
 					</Disclosure.Panel>
 				</>

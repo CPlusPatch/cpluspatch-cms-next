@@ -21,13 +21,13 @@ function Main({ posts, user, isAdmin }) {
 				<meta property="og:title" content="Example title" />
 			</Head>
 			<Navbar user={user}/>
-			<div className="relative w-full h-full max-w-6xl mx-auto">
+			<div className="relative w-full h-full max-w-6xl px-5 mx-auto">
 				<main className="mt-14">
 					<div className="divide-y divide-gray-700">
 						<Header />
-						<div className="grid gap-16 pt-12 mt-12 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
+						<div className="grid pt-12 mt-12 divide-y md:divide-none gap-x-16 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12 divide-gray-70 gap-y-10">
 							{posts.map((post) => (
-								<div key={post.id}>
+								<div key={post.id} className="pt-6 md:mt-0">
 									<div>
 										<a
 											href="/category/article"
@@ -118,7 +118,7 @@ function Header() {
 		router.push(`/editor/${post.id}`);
 	}
 	return (
-		<div className="flex items-center justify-between pt-6 pb-8 space-y-2 md:space-y-5">
+		<div className="items-center justify-between block pt-6 pb-8 space-y-2 md:flex md:space-y-5">
 			<div>
 				<h1 className="text-3xl font-extrabold leading-9 tracking-tight dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">Recent publications</h1>
 				<p className="mt-2 text-lg leading-7 dark:text-gray-200">The latest crap written directly served to you by the wonderful invention called the Internet</p>
