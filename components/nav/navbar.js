@@ -4,13 +4,16 @@ import { SearchIcon } from '@heroicons/react/solid';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import Image from "next/future/image";
 import Link from 'next/link';
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
+import { signIn, signOut } from "next-auth/react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
-  return (
+function Navbar({ user }) {
+  	return (
 		<Disclosure
 			as="nav"
 			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg bg-opacity-30 top-0 z-50 font-['Exo_2']">
@@ -94,6 +97,7 @@ export default function Navbar() {
 								</button> */}
 
 								{/* Profile dropdown */}
+								{user && (
 								<Menu
 									as="div"
 									className="relative flex-shrink-0 ml-4">
@@ -101,15 +105,15 @@ export default function Navbar() {
 										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 											<span className="sr-only">
 												Open user menu
-											</span>
-											<Image
-												className="w-8 h-8 rounded-md"
-												src="/static/logo.png"
-												alt=""
-												width={32}
-												height={32}
-												quality={100}
-											/>
+											</span> 
+												<Image
+													className="w-8 h-8 rounded-md"
+													src="/static/logo.png"
+													alt=""
+													width={32}
+													height={32}
+													quality={100}
+												/>
 										</Menu.Button>
 									</div>
 									<Transition
@@ -151,21 +155,68 @@ export default function Navbar() {
 											</Menu.Item>
 											<Menu.Item>
 												{({ active }) => (
-													<a
-														href="#"
+													<button
+														onClick={() => signOut()}
 														className={classNames(
 															active
 																? "bg-gray-100"
 																: "",
-															"block px-4 py-2 text-sm text-gray-700"
+															"block px-4 py-2 text-sm text-gray-700 w-full text-left"
 														)}>
 														Sign out
-													</a>
+													</button>
 												)}
 											</Menu.Item>
 										</Menu.Items>
 									</Transition>
 								</Menu>
+								)}
+								{!user && (
+								<Menu
+									as="div"
+									className="relative flex-shrink-0 ml-4">
+									<div>
+										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+											<span className="sr-only">
+												Open user menu
+											</span>
+												{/* eslint-disable-next-line @next/next/no-img-element */}
+												<img
+													className="w-8 h-8 rounded-md"
+													src="https://gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+													alt=""
+													width={32}
+													height={32}
+												/>
+										</Menu.Button>
+									</div>
+									<Transition
+										as={Fragment}
+										enter="transition ease-out duration-100"
+										enterFrom="transform opacity-0 scale-95"
+										enterTo="transform opacity-100 scale-100"
+										leave="transition ease-in duration-75"
+										leaveFrom="transform opacity-100 scale-100"
+										leaveTo="transform opacity-0 scale-95">
+										<Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+											<Menu.Item>
+												{({ active }) => (
+													<button
+														onClick={() => signIn()}
+														className={classNames(
+															active
+																? "bg-gray-100"
+																: "",
+															"block px-4 py-2 text-sm text-gray-700 w-full text-left"
+														)}>
+														Sign in
+													</button>
+												)}
+											</Menu.Item>
+										</Menu.Items>
+									</Transition>
+								</Menu>
+								)}
 							</div>
 						</div>
 					</div>
@@ -204,3 +255,5 @@ export default function Navbar() {
 		</Disclosure>
   );
 }
+
+export default Navbar;

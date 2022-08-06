@@ -13,14 +13,15 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-function Main({ posts, isAdmin }) {
+function Main({ posts, user, isAdmin }) {
+	console.log(user);
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
 				<title>Posts &middot; CPlusPatch</title>
 				<meta property="og:title" content="Example title" />
 			</Head>
-			<Navbar />
+			<Navbar user={user}/>
 			<div className="relative w-full h-full max-w-6xl mx-auto">
 				<main className="mt-14">
 					<div className="divide-y divide-gray-700">
@@ -140,7 +141,8 @@ export async function getServerSideProps(context) {
 	return {
 		props: {
 			posts: posts,
-			isAdmin: session && (session.user.admin ?? false)
+			user: session ? session.user : false,
+			isAdmin: session && (session.user.admin ?? false), // Using this for clearer code
 		}
 	};
 }
