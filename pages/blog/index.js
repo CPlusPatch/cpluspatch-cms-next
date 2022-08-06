@@ -13,7 +13,7 @@ function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-function Main({ posts }) {
+function Main({ posts, isAdmin }) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
@@ -51,11 +51,12 @@ function Main({ posts }) {
 											</p>
 										</a>
 									</Link>
+									{isAdmin && (
 									<Link href={`/editor/${post.id}`}>
 										<a className="block mt-4">
 											Edit <ChevronRightIcon className="inline w-3 h-3"/>
 										</a>
-									</Link>
+									</Link>)}
 									<div className="flex items-center mt-6">
 										<div className="flex-shrink-0">
 											<a href="#">
@@ -138,7 +139,8 @@ export async function getServerSideProps(context) {
 					await firestore.getPosts(["public", "==", true]);
 	return {
 		props: {
-			posts: posts
+			posts: posts,
+			isAdmin: session && (session.user.admin ?? false)
 		}
 	};
 }

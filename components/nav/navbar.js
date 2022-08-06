@@ -31,23 +31,6 @@ export default function Navbar() {
 								</div>
 								<div className="hidden lg:ml-6 lg:flex lg:space-x-8">
 									{/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-									{/* <Link href={"/blog"}>
-										<a
-											href="#"
-											className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-											Blog
-										</a>
-									</Link>
-									<a
-										href="#"
-										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-										Projects
-									</a>
-									<a
-										href="#"
-										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-										About
-									</a> */}
 									<a
 										href="#socials"
 										className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
