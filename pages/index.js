@@ -283,13 +283,21 @@ export default function Landing({ user }) {
 						<div className="flex-1" />
 						<div className="flex-1 w-full bg-gray-800" />
 					</div>
-					<div className="px-4 mx-auto max-w-7xl sm:px-6">
+					<div className="relative px-4 mx-auto max-w-7xl sm:px-6">
 						<Image
-							className="relative rounded-lg shadow-lg"
+							className="rounded-lg shadow-lg"
 							src={mainHero}
 							alt="VSCode screenshot"
 							priority="true"
 							placeholder='blur'
+							sizes={[
+								'(max-width: 399px) 399px',
+								'(max-width: 519px) 519px',
+								'(max-width: 639px) 639px',
+								'(max-width: 767px) 767px',
+								'(max-width: 1023px) 1023px',
+								'(max-width: 1279px) 1279px',
+								'1920px']}
 						/>
 					</div>
 				</div>
@@ -367,7 +375,20 @@ function Languages() {
 							<li key={item.name} className="sm:py-8">
 								<div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
 									<div className="aspect-1">
-										<Image className="object-cover rounded-lg shadow-lg" src={item.image} alt="" placeholder='blur'/>
+										<Image
+										className="object-cover rounded-lg shadow-lg"
+										src={item.image}
+										alt=""
+										placeholder='blur'
+										sizes={[
+											'(max-width: 399px) 399px',
+											'(max-width: 519px) 519px',
+											'(max-width: 639px) 639px',
+											'(max-width: 767px) 767px',
+											'(max-width: 1023px) 1023px',
+											'(max-width: 1279px) 1279px',
+											'1920px']}
+										/>
 									</div>
 									<div className="sm:col-span-2">
 										<div className="space-y-4">
