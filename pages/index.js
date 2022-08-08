@@ -2,7 +2,6 @@ import Image from 'next/future/image'
 import { Disclosure } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/outline'
 import Head from 'next/head';
-import Link from 'next/link';
 import { authOptions } from './api/auth/[...nextauth]';
 import { unstable_getServerSession } from "next-auth/next";
 
@@ -291,12 +290,12 @@ export default function Landing({ user }) {
 							priority="true"
 							placeholder='blur'
 							sizes={[
-								'(max-width: 399px) 399px',
-								'(max-width: 519px) 519px',
-								'(max-width: 639px) 639px',
-								'(max-width: 767px) 767px',
-								'(max-width: 1023px) 1023px',
-								'(max-width: 1279px) 1279px',
+								'(max-width: 400px) 350px',
+								'(max-width: 550px) 500px',
+								'(max-width: 600px) 550px',
+								'(max-width: 700px) 600px',
+								'(max-width: 1000px) 900px',
+								'(max-width: 1200px) 1100px',
 								'1920px']}
 						/>
 					</div>
@@ -381,13 +380,11 @@ function Languages() {
 										alt=""
 										placeholder='blur'
 										sizes={[
-											'(max-width: 399px) 399px',
-											'(max-width: 519px) 519px',
-											'(max-width: 639px) 639px',
-											'(max-width: 767px) 767px',
-											'(max-width: 1023px) 1023px',
-											'(max-width: 1279px) 1279px',
-											'1920px']}
+											'(max-width: 200px) 150px',
+											'(max-width: 300px) 250px',
+											'(max-width: 400px) 350px',
+											'(max-width: 550px) 500px',
+											'500px']}
 										/>
 									</div>
 									<div className="sm:col-span-2">

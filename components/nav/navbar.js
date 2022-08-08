@@ -1,11 +1,8 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { SearchIcon } from '@heroicons/react/solid';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-import Image from "next/future/image";
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
-import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "../../pages/api/auth/[...nextauth]";
 import { signIn, signOut } from "next-auth/react";
 
 function classNames(...classes) {
