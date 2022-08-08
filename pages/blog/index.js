@@ -24,7 +24,7 @@ function Main({ posts, user, isAdmin }) {
 			<div className="relative w-full h-full max-w-6xl px-5 mx-auto">
 				<main className="mt-14">
 					<div className="divide-y divide-gray-700">
-						<Header />
+						{user && (user.admin) ? <Header /> : null}
 						<div className="grid pt-12 mt-12 divide-y md:divide-none gap-x-16 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12 divide-gray-70 gap-y-10">
 							{posts.map((post) => (
 								<div key={post.id} className="pt-6 md:mt-0">
