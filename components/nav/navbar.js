@@ -112,10 +112,11 @@ function Navbar({ user }) {
 										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 											<span className="sr-only">
 												Open user menu
-											</span> 
-												<Image
+											</span>
+												{/* eslint-disable-next-line @next/next/no-img-element */}
+												<img
 													className="w-8 h-8 rounded-md"
-													src="/static/logo.png"
+													src={user.image}
 													alt=""
 													width={32}
 													height={32}
