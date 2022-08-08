@@ -41,7 +41,7 @@ function Main({ posts, user, isAdmin }) {
 											</span>
 										</a>
 									</div>
-									<Link href={`/blog/${post.data.slug}`}>
+									<Link href={`/blog/${post.data.slug}`} prefetch={false}>
 										<a className="block mt-4">
 											<p className="text-xl font-semibold text-gray-900">
 												{post.data.title}
@@ -52,7 +52,7 @@ function Main({ posts, user, isAdmin }) {
 										</a>
 									</Link>
 									{isAdmin && (
-									<Link href={`/editor/${post.id}`}>
+									<Link href={`/editor/${post.id}`} prefetch={false}>
 										<a className="block mt-4">
 											Edit <ChevronRightIcon className="inline w-3 h-3"/>
 										</a>
