@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../../components/nav/navbar';
 import { ViewGridAddIcon } from '@heroicons/react/outline';
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 
-function Editor({ id }) {
+function Editor({ id, user }) {
 	const [post, setPost] = useState({
 		id: id,
 		data: {
@@ -76,7 +78,7 @@ function Editor({ id }) {
 					{post.data.title ? post.data.title : "Loading editor..."}
 				</title>
 			</Head>
-			<Navbar />
+			<Navbar user={user}/>
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
 				<div className="grid w-full h-full grid-cols-1 mt-8 lg:grid-cols-12 lg:gap-8 md:mt-16 lg:mt-24">
 					<article className="w-full h-full col-span-9 md:px-0 max-w-none">
@@ -107,10 +109,13 @@ function Aside() {
 	)
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params, req, res }) => {
+	const session = await unstable_getServerSession(req, res, authOptions);
+
 	return {
 		props: {
-			id: params.id
+			id: params.id,
+			user: session ? session.user : false,
 		}
 	}
 }

@@ -342,6 +342,7 @@ export default function Landing({ user }) {
 			</div>
 			<Languages/>
 			<Faqs/>
+			<Projects/>
 			<ContactHeader/>
 			<Footer/>
 		</div>
@@ -443,6 +444,49 @@ function Faqs() {
 							</Disclosure>
 						))}
 					</dl>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function Projects() {
+	const projects = [
+		{
+			name: "Project 1",
+			image: "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+			description: "This is a description of project 1",
+		}
+	]
+	// List of projects I have worked on
+	return (
+		<div className="bg-gray-50">
+			<div className="px-4 py-12 mx-auto max-w-7xl sm:py-16 sm:px-6 lg:px-8">
+				<div className="max-w-3xl mx-auto divide-y-2 divide-gray-200">
+					<h2 className="text-3xl font-extrabold text-center text-gray-900 sm:text-4xl">
+						Projects
+					</h2>
+					<div className="mt-6 space-y-6 divide-y divide-gray-200">
+						{projects.map((project) => (
+							<div key={project.name} className="flex items-center space-y-2">
+								<div className="flex-shrink-0">
+									<img
+										className="w-12 h-12 rounded-full"
+										src={project.image}
+										alt={project.name}
+									/>
+								</div>
+								<div className="ml-4">
+									<h3 className="text-lg font-medium text-gray-900">
+										{project.name}
+									</h3>
+									<p className="text-base text-gray-500">
+										{project.description}
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>

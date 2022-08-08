@@ -20,10 +20,10 @@ export default async function handler(req, res) {
 				error: "Post not found"
 			})
 		}
-	} else if (req.method === "PUT") {
+	} else if (req.method === "PUT" && session.user.admin) { // User must be an admin to edit posts
 		const postData = req.body;
 		const post = (await firestore.updatePost(postData.id, postData.data));
-		if(post && (session.admin ?? false)) { // User must be an admin to edit posts
+		if(post) {
 			res.status(200).json({
 				success: true,
 			})

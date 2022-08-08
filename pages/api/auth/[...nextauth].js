@@ -24,7 +24,10 @@ export const authOptions = {
 			session.user.admin = user.admin
 			return session
 		}
-	}
+	},
+	pages: {
+		signIn: "/auth/signin",
+	},
 }
   
 export default NextAuth(authOptions)
