@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { DocumentTextIcon } from '@heroicons/react/solid';
-import { MenuIcon, XIcon, ServerIcon } from '@heroicons/react/outline';
+import { ServerIcon, TrashIcon } from '@heroicons/react/outline';
 import { signIn, signOut } from "next-auth/react";
 
 function classNames(...classes) {
@@ -12,7 +12,7 @@ function Navbar({ user, onSave, isSaving, onTitleChange, title }) {
   	return (
 		<Disclosure
 			as="nav"
-			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg bg-opacity-30 top-0 z-50 font-['Exo_2']">
+			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg bg-opacity-30 top-0 z-50 font-['Inter']">
 			{({ open }) => (
 				<>
 					<div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
@@ -32,7 +32,7 @@ function Navbar({ user, onSave, isSaving, onTitleChange, title }) {
 								</div>
 							</div>
 							<div className="flex items-center justify-center flex-1 px-2 lg:ml-6 lg:justify-start">
-								<div className="w-full max-w-lg lg:max-w-xs">
+								<div className="w-full max-w-lg lg:max-w-xs lg:mr-6">
 									<label htmlFor="search" className="sr-only">
 										Search
 									</label>
@@ -52,6 +52,9 @@ function Navbar({ user, onSave, isSaving, onTitleChange, title }) {
 										/>
 									</div>
 								</div>
+								<button type="button" className="ml-auto h-9 inline-flex justify-center items-center px-3 py-1.5 text-sm font-medium leading-4 text-rose-600 bg-rose-100 border border-transparent rounded-md hover:bg-rose-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+									<TrashIcon className="w-4 h-4"/>
+								</button>
 							</div>
 							<div className="hidden lg:ml-4 lg:flex lg:items-center">
 								{/* <button
