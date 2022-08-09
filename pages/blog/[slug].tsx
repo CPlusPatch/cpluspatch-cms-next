@@ -5,15 +5,23 @@ import Head from "next/head";
 import Navbar from '../../components/nav/navbar';
 import Blocks from "editorjs-blocks-react-renderer";
 import firestore from "../../utils/firestore";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
+import type { DataProp } from "editorjs-blocks-react-renderer";
 
-function DemoArticle({ title, blocks, datePublished }) {
+function Article({ title, blocks, datePublished, user }: {
+	title: string;
+	blocks: DataProp;
+	datePublished: number | boolean;
+	user: object;
+}) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
 				<title>{title} &middot; CPlusPatch 2022</title>
 				<meta property="og:title" content={title} />
 			</Head>
-			<Navbar />
+			<Navbar user={user} />
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
 				<div className="grid w-full h-full grid-cols-1 mt-8 lg:grid-cols-12 lg:gap-8 md:mt-16 lg:mt-24">
 					<article className="w-full h-full col-span-9 md:px-0 max-w-none">
@@ -23,7 +31,8 @@ function DemoArticle({ title, blocks, datePublished }) {
 							</h1>
 						</div>
 						<div className="overflow-hidden md:rounded-lg aspect-w-16 aspect-h-9">
-							<img src="https://res.cloudinary.com/braydoncoyer/image/upload/v1636418215/learn_tailwindplay_banner.jpg" />
+							{/* eslint-disable-next-line @next/next/no-img-element */}
+							<img src="https://res.cloudinary.com/braydoncoyer/image/upload/v1636418215/learn_tailwindplay_banner.jpg" alt=""/>
 						</div>
 						<div className="w-full min-w-full px-4 mt-10 prose">
 							<Blocks data={blocks}/>
@@ -111,9 +120,10 @@ function Aside() {
 	);
 }
 
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params, req, res }) => {
 	const { slug } = params;
 	const post = (await firestore.getPostByFields("slug", "==", slug))[0];
+	const session = await unstable_getServerSession(req, res, authOptions);
 
 	if (!post) {
 		return {
@@ -126,8 +136,9 @@ export const getServerSideProps = async ({ params }) => {
 			title: post.data.title,
 			blocks: post.data.blocks,
 			datePublished: post.data.datePublished,
+			user: session ? session.user : false,
 		}
 	}
 }
 
-export default DemoArticle;
+export default Article;

@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, version } from 'react';
 import Head from 'next/head';
 import Navbar from '../../components/nav/editor-nav';
 import { CheckCircleIcon, XIcon, EmojiSadIcon } from '@heroicons/react/solid';
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { Toaster, toast } from "react-hot-toast";
+import { GetServerSideProps } from 'next';
 
 
 function Editor({ id, user }) {
-	const [blocks, setBlocks] = useState([]);
 	const [title, setTitle] = useState("");
+	const [editor, setEditor] = useState(null);
 
 	const [isEditorInitialized, setIsEditorInitialized] = useState(false);
 
@@ -20,7 +21,6 @@ function Editor({ id, user }) {
 			try {
 				var data = await (await window.fetch(`/api/post/${id}`)).json();
 
-				setBlocks(data.post.data.blocks);
 				setTitle(data.post.data.title);
 				console.log("Fetched post data");
 
@@ -30,7 +30,7 @@ function Editor({ id, user }) {
 				const CodeTool = (await import('@editorjs/code')).default;
 				const List = (await import('@editorjs/list')).default;
 
-				new EditorJS({
+				setEditor(new EditorJS({
 					holder: 'editor',
 					tools: {
 						list: {
@@ -42,10 +42,7 @@ function Editor({ id, user }) {
 						code: CodeTool
 					},
 					data: data.post.data.blocks,
-					onChange: async (editor) => {
-						setBlocks(await editor.saver.save());
-					}
-				});
+				}));
 
 				setIsEditorInitialized(true);
 			} catch (e) {
@@ -66,12 +63,15 @@ function Editor({ id, user }) {
 		try {
 			setIsSaving(true);
 			console.log("Saving data");
+
+			const editorData = await editor.save();
+
 			const res = await (await window.fetch(`/api/post/${id}`, {
 				method: "PUT",
 				body: JSON.stringify({
 					id: id,
 					data: {
-						blocks: blocks,
+						blocks: editorData,
 						title: title
 					}
 				}),
@@ -172,7 +172,7 @@ function errorToast(title, message) {
 	})
 }
 
-export const getServerSideProps = async ({ params, req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params, req, res }) => {
 	const session = await unstable_getServerSession(req, res, authOptions);
 
 	return {

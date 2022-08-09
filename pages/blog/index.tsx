@@ -8,6 +8,7 @@ import { ChevronRightIcon } from '@heroicons/react/outline';
 import { authOptions } from '../api/auth/[...nextauth]';
 import { unstable_getServerSession } from "next-auth/next"
 import Image from 'next/future/image';
+import type { GetServerSideProps } from "next";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
@@ -134,7 +135,7 @@ function Header({ isAdmin }) {
 	)
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await unstable_getServerSession(context.req, context.res, authOptions);
 	
 	let posts = (session && (session.user.admin ?? false)) ? await firestore.getPosts() :

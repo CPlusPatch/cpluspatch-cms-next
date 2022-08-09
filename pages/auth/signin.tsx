@@ -12,7 +12,7 @@ const providerLogos = {
 	GitHub: githubLogo,
 };
 
-export default function SignIn({ providers, user }) {
+export default function SignIn({ providers, user }: { providers: Record<any, any>; user: object }) {
 	return (
 	<div className="bg-gray-50 font-['Exo_2']">
 			<Head>
@@ -52,7 +52,7 @@ export default function SignIn({ providers, user }) {
 }
 
 export async function getServerSideProps(context) {
-	const providers = await getProviders()
+	const providers: Record<any, any> | null = await getProviders();
 	const session = await unstable_getServerSession(context.req, context.res, authOptions);
 
 	if (session) {

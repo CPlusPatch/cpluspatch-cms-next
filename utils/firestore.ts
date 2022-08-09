@@ -5,9 +5,9 @@ import { getFirestore } from "firebase-admin/firestore";
 if (!admin.apps.length) {
 	var app = admin.initializeApp({
 		credential: admin.credential.cert({
-			project_id: process.env.FIREBASE_ADMIN_PROJECT_ID,
-			private_key: process.env.FIREBASE_ADMIN_PRIVATE_KEY.replace(/\\n/g, "\n"),
-			client_email: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
+			projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
+			privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY.replace(/\\n/g, "\n"),
+			clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
 		}),
 	})
 } else {
@@ -21,10 +21,11 @@ const methods = {
 	app: app,
 	db: db,
 	postsRef: postsRef,
-	getPosts: async (fields = false) => {
+	getPosts: async (fields: any[] | boolean = false) => {
+		console.log(fields);
 		let posts = [];
 		let data = fields ? 
-			await postsRef.where(...fields).orderBy("dateCreated", "desc").get() :
+			await postsRef.where(fields[0], fields[1], fields[2]).orderBy("dateCreated", "desc").get() :
 			await postsRef.orderBy("dateCreated", "desc").get();
 		
 		data.forEach((doc) => {
@@ -35,9 +36,9 @@ const methods = {
 		});
 		return posts ?? false;
 	},
-	getPostByFields: async (...fields) => {
+	getPostByFields: async (...fields: any[]) => {
 		let posts = [];
-		let data = await postsRef.where(...fields).get();
+		let data = await postsRef.where(fields[0], fields[1], fields[2]).get();
 		data.forEach((doc) => {
 			posts.push({
 				id: doc.id,

@@ -4,9 +4,10 @@ import { ChevronDownIcon } from '@heroicons/react/outline'
 import Head from 'next/head';
 import { authOptions } from './api/auth/[...nextauth]';
 import { unstable_getServerSession } from "next-auth/next";
+import Navbar from '../components/nav/navbar';
+import type { GetServerSideProps } from 'next';
 
 import mainHero from "../public/static/banner.png";
-import Navbar from '../components/nav/navbar';
 import firebaseLogo from '../public/static/firebase.svg';
 import nextJsLogo from '../public/static/nextjs.svg';
 import vercelLogo from '../public/static/vercel.svg';
@@ -287,16 +288,9 @@ export default function Landing({ user }) {
 							className="rounded-lg shadow-lg"
 							src={mainHero}
 							alt="VSCode screenshot"
-							priority="true"
+							priority={true}
 							placeholder='blur'
-							sizes={[
-								'(max-width: 400px) 350px',
-								'(max-width: 550px) 500px',
-								'(max-width: 600px) 550px',
-								'(max-width: 700px) 600px',
-								'(max-width: 1000px) 900px',
-								'(max-width: 1200px) 1100px',
-								'1920px']}
+							sizes='(max-width: 400px) 350px, (max-width: 550px) 500px, (max-width: 600px) 550px, (max-width: 700px) 600px, (max-width: 1000px) 900px, (max-width: 1200px) 1100px, 1920px'
 						/>
 					</div>
 				</div>
@@ -379,12 +373,7 @@ function Languages() {
 										src={item.image}
 										alt=""
 										placeholder='blur'
-										sizes={[
-											'(max-width: 200px) 150px',
-											'(max-width: 300px) 250px',
-											'(max-width: 400px) 350px',
-											'(max-width: 550px) 500px',
-											'500px']}
+										sizes='(max-width: 200px) 150px, (max-width: 300px) 250px, (max-width: 400px) 350px, (max-width: 550px) 500px, 500px'
 										/>
 									</div>
 									<div className="sm:col-span-2">
@@ -488,7 +477,7 @@ function ContactHeader() {
 	);
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 	const session = await unstable_getServerSession(context.req, context.res, authOptions);
 	
 	return {
