@@ -114,6 +114,13 @@ function Aside() {
 export const getServerSideProps = async ({ params }) => {
 	const { slug } = params;
 	const post = (await firestore.getPostByFields("slug", "==", slug))[0];
+
+	if (!post) {
+		return {
+			notFound: true,
+		}
+	}
+
 	return {
 		props: {
 			title: post.data.title,

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../../components/nav/editor-nav';
+import { CheckCircleIcon, XIcon } from '@heroicons/react/solid';
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { Toaster, toast } from "react-hot-toast";
 
 
 function Editor({ id, user }) {
@@ -68,6 +70,7 @@ function Editor({ id, user }) {
     		headers: { 'Content-Type': 'application/json' }
 		})).json();
 		setIsSaving(false);
+		saveToast();
 	}
 
 	return (
@@ -77,6 +80,7 @@ function Editor({ id, user }) {
 					{title}
 				</title>
 			</Head>
+			<Toaster/>
 			<Navbar user={user} onSave={saveData} isSaving={isSaving} onTitleChange={(title) => {
 				setTitle(title);
 			}} title={title}/>
@@ -105,6 +109,37 @@ function Aside() {
 			
 		</aside>
 	)
+}
+
+function saveToast() {
+	toast.custom((t) => (
+		 <div className={`${
+			t.visible ? 'animate-enter' : 'animate-leave'
+		  } max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden`}>
+		 <div className="p-4">
+		   <div className="flex items-start">
+			 <div className="flex-shrink-0">
+			   <CheckCircleIcon className="w-6 h-6 text-green-400" aria-hidden="true" />
+			 </div>
+			 <div className="ml-3 w-0 flex-1 pt-0.5">
+			   <p className="text-sm font-medium text-gray-900">Successfully saved!</p>
+			 </div>
+			 <div className="flex flex-shrink-0 ml-4">
+			   <button
+				 className="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+				 onClick={() => toast.dismiss(t.id)}
+			   >
+				 <span className="sr-only">Close</span>
+				 <XIcon className="w-5 h-5" aria-hidden="true" />
+			   </button>
+			 </div>
+		   </div>
+		 </div>
+	   </div>
+	), {
+		duration: 4000,
+		position: "bottom-right",
+	})
 }
 
 export const getServerSideProps = async ({ params, req, res }) => {
