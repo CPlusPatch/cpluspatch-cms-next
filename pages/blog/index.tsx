@@ -62,22 +62,22 @@ function Main({ posts, user, isAdmin }) {
 										<div className="flex-shrink-0">
 											<a href="#">
 												<span className="sr-only">
-													CPlusPatch
+													{post.user.data.name}
 												</span>
-												<Image
+												{/* eslint-disable-next-line @next/next/no-img-element */}
+												<img
 													className="w-10 h-10 rounded-md"
-													src="/static/logo.png"
+													src={post.user.data.image}
 													alt=""
 													width={40}
 													height={40}
-													quality={100}
 												/>
 											</a>
 										</div>
 										<div className="ml-3">
 											<p className="text-sm font-medium text-gray-900">
 												<a href="#">
-													CPlusPatch
+													{post.user.data.name}
 												</a>
 											</p>
 											<div className="flex space-x-1 text-sm text-gray-500">
@@ -140,6 +140,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	
 	let posts = (session && (session.user.admin ?? false)) ? await firestore.getPosts() :
 					await firestore.getPosts(["public", "==", true]);
+	if (posts) {
+		posts = await Promise.all(posts.map(async (post) => {
+			post.user = await firestore.getUserById(post.data.author);
+			return post;
+		}));
+	}
 	return {
 		props: {
 			posts: posts,

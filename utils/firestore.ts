@@ -16,13 +16,14 @@ if (!admin.apps.length) {
 
 const db = getFirestore(app);
 var postsRef = db.collection("posts");
+var usersRef = db.collection("users");
 
 const methods = {
 	app: app,
 	db: db,
 	postsRef: postsRef,
+	usersRef: usersRef,
 	getPosts: async (fields: any[] | boolean = false) => {
-		console.log(fields);
 		let posts = [];
 		let data = fields ? 
 			await postsRef.where(fields[0], fields[1], fields[2]).orderBy("dateCreated", "desc").get() :
@@ -85,6 +86,19 @@ const methods = {
 			return (await postsRef.add(data));
 		} catch (error) {
 			console.log(error);
+			return false;
+		}
+	},
+	getUserById: async (id) => {
+		try {
+			let data = await usersRef.doc(id).get();
+			let user = {
+				id: data.id,
+				data: data.data()
+			};
+			return user;
+		} catch (error) {
+			console.log(error)
 			return false;
 		}
 	},
