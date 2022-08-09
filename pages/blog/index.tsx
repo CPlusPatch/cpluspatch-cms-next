@@ -6,7 +6,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import { authOptions } from '../api/auth/[...nextauth]';
-import { unstable_getServerSession } from "next-auth/next"
+import { unstable_getServerSession } from "next-auth/next";
+import moment from "moment";
 import Image from 'next/future/image';
 import type { GetServerSideProps } from "next";
 
@@ -82,7 +83,7 @@ function Main({ posts, user, isAdmin }) {
 											</p>
 											<div className="flex space-x-1 text-sm text-gray-500">
 												<time dateTime={post.data.dateCreated} >
-													{post.data.dateCreated}
+													{moment(post.data.dateCreated).format('MMMM DD, YYYY')}
 												</time>
 												<span aria-hidden="true">
 													&middot;

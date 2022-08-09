@@ -20,6 +20,7 @@
     "@next/bundle-analyzer": "^12.2.4",
     "editorjs-blocks-react-renderer": "^1.2.4",
     "firebase-admin": "^11.0.0",
+    "moment": "^2.29.4",
     "next": "^12.2.1",
     "next-auth": "^4.10.2",
     "nextjs-progressbar": "^0.0.14",

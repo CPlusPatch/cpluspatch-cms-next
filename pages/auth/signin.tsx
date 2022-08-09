@@ -11,7 +11,7 @@ import loginHero from "../../public/static/login-hero.jpg";
 const providerLogos = {
 	GitHub: githubLogo,
 };
-
+0
 export default function SignIn({ providers, user }: { providers: Record<any, any>; user: object }) {
 	return (
 	<div className="bg-gray-50 font-['Exo_2']">
