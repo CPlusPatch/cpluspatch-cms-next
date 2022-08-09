@@ -72,7 +72,7 @@ const methods = {
 	},
 	updatePost: async (id, data) => {
 		try {
-			let res = await postsRef.doc(id).update(data);
+			let res = await postsRef.doc(id).set(data, { merge: true });
 			return res;
 		} catch (e) {
 			console.error(e);

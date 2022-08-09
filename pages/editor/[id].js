@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Navbar from '../../components/nav/navbar';
-import { ViewGridAddIcon } from '@heroicons/react/outline';
+import Navbar from '../../components/nav/editor-nav';
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 
 function Editor({ id, user }) {
-	const [post, setPost] = useState({
-		id: id,
-		data: {
-			author: false,
-			banner: false,
-			blocks: false,
-			dateCreated: false,
-			dateLastEdited: false,
-			datePublished: false,
-			description: false,
-			public: false,
-			slug: false,
-			title: false
-		}
-	});
+	const [blocks, setBlocks] = useState([]);
+	const [title, setTitle] = useState("");
+
+	const [isEditorInitialized, setIsEditorInitialized] = useState(false);
+
+	const [isSaving, setIsSaving] = useState(false);
 
 	useEffect(() => {
 		async function fetchData() {
 			const data = await (await window.fetch(`/api/post/${id}`)).json();
-			setPost(data.post);
+			setBlocks(data.post.data.blocks);
+			setTitle(data.post.data.title);
 			console.log("Fetched post data");
 
 			const EditorJS = (await import('@editorjs/editorjs')).default;
@@ -48,46 +39,53 @@ function Editor({ id, user }) {
 				},
 				data: data.post.data.blocks,
 				onChange: async (editor) => {
-					var postsCopy = post;
-					postsCopy.data.blocks = await editor.saver.save();
-					setPost(postsCopy);
+					setBlocks(await editor.saver.save());
 				}
 			});
+
+			setIsEditorInitialized(true);
 		}
 
-		if (typeof window !== "undefined") {
+		if (typeof window !== "undefined" && isEditorInitialized === false) {
 			fetchData();
 		}
-	}, [id]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	// Runs every time the editor is saved
 	// @Param {Object} editor - Editor object received from the editor
 	const saveData = async () => {
+		setIsSaving(true);
 		console.log("Saving data");
 		const res = await (await window.fetch(`/api/post/${id}`, {
 			method: "PUT",
-			body: JSON.stringify(post),
+			body: JSON.stringify({
+				id: id,
+				data: {
+					blocks: blocks,
+					title: title
+				}
+			}),
     		headers: { 'Content-Type': 'application/json' }
 		})).json();
+		setIsSaving(false);
 	}
 
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
 				<title>
-					{post.data.title ? post.data.title : "Loading editor..."}
+					{title}
 				</title>
 			</Head>
-			<Navbar user={user}/>
+			<Navbar user={user} onSave={saveData} isSaving={isSaving} onTitleChange={(title) => {
+				setTitle(title);
+			}} title={title}/>
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
 				<div className="grid w-full h-full grid-cols-1 mt-8 lg:grid-cols-12 lg:gap-8 md:mt-16 lg:mt-24">
 					<article className="w-full h-full col-span-9 md:px-0 max-w-none">
 						<div className="container mb-12">
-							<button onClick={saveData}>save</button>
 							<h1 className="text-3xl font-extrabold text-center md:text-5xl font-['Manrope'] mb-4 text-black">
-								{post.data.title
-									? post.data.title
-									: "Loading..."}
+								{title ? title : "Loading..."}
 							</h1>
 						</div>
 						<div className="w-full min-w-full px-4 mt-10 prose">

@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 		}
 	} else if (req.method === "PUT" && session.user.admin) { // User must be an admin to edit posts
 		const postData = req.body;
-		const post = (await firestore.updatePost(postData.id, postData.data));
+		const post = (await firestore.updatePost(req.query.id, postData.data));
 		if(post) {
 			res.status(200).json({
 				success: true,
