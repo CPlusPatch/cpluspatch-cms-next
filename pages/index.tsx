@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import Image from 'next/future/image'
-import { Disclosure } from '@headlessui/react'
+import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import Head from 'next/head';
 import { authOptions } from './api/auth/[...nextauth]';
@@ -198,7 +198,7 @@ export default function Landing({ user }) {
 	return (
 		<div className="bg-gray-50 dark:bg-[#020918] font-['Exo_2'] duration-200">
 			<Head>
-				<title>Welcome! &middot; CPlusPatch 2022</title>
+				<title>Welcome! &middot; CPlusPatch</title>
 			</Head>
 			<Navbar user={user}/>
 			<div className="relative overflow-hidden">
@@ -485,20 +485,29 @@ function Faqs() {
 															open
 																? "-rotate-180"
 																: "rotate-0",
-															"h-6 w-6 transform"
+															"h-6 w-6 transform duration-300 ease-in-out"
 														)}
 														aria-hidden="true"
 													/>
 												</span>
 											</Disclosure.Button>
 										</dt>
-										<Disclosure.Panel
-											as="dd"
-											className="pr-12 mt-2">
-											<p className="text-base text-gray-500 dark:text-gray-400">
-												{faq.answer}
-											</p>
-										</Disclosure.Panel>
+										<Transition
+											enter="transition duration-100 ease-out"
+											enterFrom="transform scale-95 opacity-0"
+											enterTo="transform scale-100 opacity-100"
+											leave="transition duration-75 ease-out"
+											leaveFrom="transform scale-100 opacity-100"
+											leaveTo="transform scale-95 opacity-0"
+										>
+											<Disclosure.Panel
+												as="dd"
+												className="pr-12 mt-2">
+												<p className="text-base text-gray-500 dark:text-gray-400">
+													{faq.answer}
+												</p>
+											</Disclosure.Panel>
+										</Transition>
 									</>
 								)}
 							</Disclosure>
