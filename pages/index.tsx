@@ -19,6 +19,7 @@ import tailwindLogo from '../public/static/tailwindcss.svg';
 // Languages & Frameworks images
 
 import javascript from '../public/static/languages/javascript.png';
+import typescript from '../public/static/languages/typescript.png';
 import react from '../public/static/languages/react.png';
 import css from '../public/static/languages/css.png';
 import html from '../public/static/languages/html.png';
@@ -47,6 +48,13 @@ const languages = [
 		description: 'JavaScript is a high-level, dynamic, untyped, and interpreted programming language. It is often abbreviated as JS, and is often called ECMAScript. It has been standardized in the ECMAScript specification.',
 		experience: "Five years",
 		image: javascript,
+	},
+	{
+		name: "TypeScript",
+		type: "Language",
+		description: "TypeScript is a superset of JavaScript that compiles to plain JavaScript, developed by Microsoft. It is developed for large-scale applications and adds optional static typing to the language.",
+		experience: "Recent",
+		image: typescript,
 	},
 	{
 		name: 'React',
