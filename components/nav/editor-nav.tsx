@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { DocumentTextIcon } from '@heroicons/react/solid';
+import { DocumentTextIcon, CogIcon } from '@heroicons/react/solid';
 import { ServerIcon, TrashIcon } from '@heroicons/react/outline';
 import { signIn, signOut } from "next-auth/react";
 
@@ -8,14 +8,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function Navbar({ user, onSave, isSaving, onTitleChange, title }) {
+function Navbar({ user, onSave, isSaving, onTitleChange, title, setSidebarOpen }) {
   	return (
 		<Disclosure
 			as="nav"
 			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg bg-opacity-30 top-0 z-50 font-['Inter']">
 			{({ open }) => (
 				<>
-					<div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
+					<div className="px-2 mx-auto sm:px-4 lg:px-8">
 						<div className="flex justify-between h-16">
 							<div className="flex px-2 lg:px-0">
 								<div className="flex items-center flex-shrink-0">
@@ -52,9 +52,16 @@ function Navbar({ user, onSave, isSaving, onTitleChange, title }) {
 										/>
 									</div>
 								</div>
-								<button type="button" className="ml-auto h-9 inline-flex justify-center items-center px-3 py-1.5 text-sm font-medium leading-4 text-rose-600 bg-rose-100 border border-transparent rounded-md hover:bg-rose-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-									<TrashIcon className="w-4 h-4"/>
-								</button>
+								<div className="flex gap-5 ml-auto">
+									<button onClick={() => {
+										setSidebarOpen(true);
+									}} type="button" className="h-9 inline-flex justify-center items-center px-3 py-1.5 text-sm font-medium leading-4 text-sky-600 bg-sky-100 border border-transparent rounded-md hover:bg-sky-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
+										<CogIcon className="w-4 h-4"/>
+									</button>
+									<button type="button" className="h-9 inline-flex justify-center items-center px-3 py-1.5 text-sm font-medium leading-4 text-rose-600 bg-rose-100 border border-transparent rounded-md hover:bg-rose-200 focus:outline-none focus:ring-2 focus:ring-offset-2">
+										<TrashIcon className="w-4 h-4"/>
+									</button>
+								</div>
 							</div>
 							<div className="hidden lg:ml-4 lg:flex lg:items-center">
 								{/* <button

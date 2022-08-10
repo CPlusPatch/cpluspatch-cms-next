@@ -83,14 +83,8 @@ function Main({ posts, user, isAdmin }) {
 											</p>
 											<div className="flex space-x-1 text-sm text-gray-500">
 												<time dateTime={post.data.dateCreated} >
-													{moment(post.data.dateCreated).format('MMMM DD, YYYY')}
+													{moment(post.data.dateCreated).fromNow()}
 												</time>
-												<span aria-hidden="true">
-													&middot;
-												</span>
-												<span>
-													6 min read
-												</span>
 											</div>
 										</div>
 									</div>

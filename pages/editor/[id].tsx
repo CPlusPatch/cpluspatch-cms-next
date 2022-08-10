@@ -1,4 +1,4 @@
-import React, { useState, useEffect, version } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../../components/nav/editor-nav';
 import { CheckCircleIcon, XIcon, EmojiSadIcon } from '@heroicons/react/solid';
@@ -6,11 +6,15 @@ import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { Toaster, toast } from "react-hot-toast";
 import { GetServerSideProps } from 'next';
+import SettingsSlideOver from '../../components/editor/settings-slideover';
 
 
 function Editor({ id, user }) {
 	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [isPublic, setIsPublic] = useState(false);
 	const [editor, setEditor] = useState(null);
+	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	const [isEditorInitialized, setIsEditorInitialized] = useState(false);
 
@@ -22,6 +26,8 @@ function Editor({ id, user }) {
 				var data = await (await window.fetch(`/api/post/${id}`)).json();
 
 				setTitle(data.post.data.title);
+				setDescription(data.post.data.description);
+				setIsPublic(data.post.data.public);
 				console.log("Fetched post data");
 
 				const EditorJS = (await import('@editorjs/editorjs')).default;
@@ -72,7 +78,11 @@ function Editor({ id, user }) {
 					id: id,
 					data: {
 						blocks: editorData,
-						title: title
+						title: title,
+						dateLastEdited: Date.now(),
+						author: user.id,
+						description: description,
+						public: isPublic,
 					}
 				}),
 				headers: { 'Content-Type': 'application/json' }
@@ -95,7 +105,7 @@ function Editor({ id, user }) {
 			<Toaster/>
 			<Navbar user={user} onSave={saveData} isSaving={isSaving} onTitleChange={(title) => {
 				setTitle(title);
-			}} title={title}/>
+			}} title={title} setSidebarOpen={setSidebarOpen}/>
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
 				<div className="w-full h-full mt-8 md:mt-8 lg:mt-16">
 					<article className="w-full h-full max-w-3xl mx-auto md:px-0">
@@ -105,6 +115,11 @@ function Editor({ id, user }) {
 					</article>
 				</div>
 			</div>
+			<SettingsSlideOver open={sidebarOpen} setOpen={setSidebarOpen} isPublic={isPublic} description={description} onSetDescription={(desc) => {
+				setDescription(desc);
+			}} onSetPublished={(published) => {
+				setIsPublic(published);
+			}}/>
 		</div>
 	);
 }
