@@ -13,6 +13,7 @@ function Editor({ id, user }) {
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [isPublic, setIsPublic] = useState(false);
+	const [banner, setBanner] = useState("");
 	const [editor, setEditor] = useState(null);
 	const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -28,6 +29,7 @@ function Editor({ id, user }) {
 				setTitle(data.post.data.title);
 				setDescription(data.post.data.description);
 				setIsPublic(data.post.data.public);
+				setBanner(data.post.data.banner);
 				console.log("Fetched post data");
 
 				const EditorJS = (await import('@editorjs/editorjs')).default;
@@ -83,6 +85,7 @@ function Editor({ id, user }) {
 						author: user.id,
 						description: description,
 						public: isPublic,
+						banner: banner,
 					}
 				}),
 				headers: { 'Content-Type': 'application/json' }
@@ -115,11 +118,7 @@ function Editor({ id, user }) {
 					</article>
 				</div>
 			</div>
-			<SettingsSlideOver open={sidebarOpen} setOpen={setSidebarOpen} isPublic={isPublic} description={description} onSetDescription={(desc) => {
-				setDescription(desc);
-			}} onSetPublished={(published) => {
-				setIsPublic(published);
-			}}/>
+			<SettingsSlideOver open={sidebarOpen} setOpen={setSidebarOpen} isPublic={isPublic} description={description} banner={banner} setDescription={setDescription} setIsPublic={setIsPublic} setBanner={setBanner}/>
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { LinkIcon, PlusSmIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
 
-export default function SlideOver({ open, setOpen, description, onSetDescription, isPublic, onSetPublished }) {
+export default function SlideOver({ open, setOpen, description, setDescription, isPublic, setIsPublic, banner, setBanner }) {
 
   return (
 		<Transition.Root show={open} as={Fragment}>
@@ -60,13 +60,26 @@ export default function SlideOver({ open, setOpen, description, onSetDescription
 														</label>
 														<div className="mt-1">
 															<textarea
-																id="description"
 																name="description"
 																rows={4}
 																className="block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500"
-																defaultValue={description}
-																onChange={(e) => onSetDescription(e.target.value)}
+																defaultValue={description ? description : ""}
+																onChange={(e) => setDescription(e.target.value)}
 															/>
+														</div>
+													</div>
+													<div>
+														<label htmlFor="project-name" className="block text-sm font-medium text-gray-900">
+															Banner URL
+														</label>
+														<div className="mt-1">
+														<input
+															type="text"
+															name="project-name"
+															className="block w-full p-2 border border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-indigo-500 focus:border-indigo-500"
+															defaultValue={banner ? banner : ""}
+															onChange={(e) => setBanner(e.target.value)}
+														/>
 														</div>
 													</div>
 													<fieldset>
@@ -84,7 +97,7 @@ export default function SlideOver({ open, setOpen, description, onSetDescription
 																		className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
 																		defaultChecked={isPublic === true}
 																		onChange={(e) => {
-																			onSetPublished(e.target.value === "on" ? true : false)
+																			setIsPublic(e.target.value === "on" ? true : false)
 																		}}
 																	/>
 																</div>
@@ -130,7 +143,7 @@ export default function SlideOver({ open, setOpen, description, onSetDescription
 																			defaultChecked={isPublic === false}
 																			className="w-4 h-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
 																			onChange={(e) => {
-																				onSetPublished(e.target.value === "on" ? false : true)
+																				setIsPublic(e.target.value === "on" ? false : true)
 																			}}
 																		/>
 																	</div>

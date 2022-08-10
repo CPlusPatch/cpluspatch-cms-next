@@ -9,17 +9,15 @@ import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import type { DataProp } from "editorjs-blocks-react-renderer";
 
-function Article({ title, blocks, datePublished, user }: {
-	title: string;
-	blocks: DataProp;
-	datePublished: number | boolean;
-	user: object;
+function Article({ post, user }: {
+	post: any
+	user: object
 }) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
 			<Head>
-				<title>{title} &middot; CPlusPatch 2022</title>
-				<meta property="og:title" content={title} />
+				<title>{post.data.title} &middot; CPlusPatch 2022</title>
+				<meta property="og:title" content={post.data.title} />
 			</Head>
 			<Navbar user={user} />
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
@@ -27,15 +25,17 @@ function Article({ title, blocks, datePublished, user }: {
 					<article className="w-full h-full col-span-9 md:px-0 max-w-none">
 						<div className="container mb-12">
 							<h1 className="text-3xl font-extrabold text-center md:text-5xl font-['Manrope'] mb-4 text-black">
-								{title}
+								{post.data.title}
 							</h1>
 						</div>
-						<div className="overflow-hidden md:rounded-lg aspect-w-16 aspect-h-9">
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img src="https://res.cloudinary.com/braydoncoyer/image/upload/v1636418215/learn_tailwindplay_banner.jpg" alt=""/>
-						</div>
+							{post.data.banner && (
+							<div className="overflow-hidden md:rounded-lg aspect-w-16 aspect-h-9">
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img src={post.data.banner} alt=""/>
+							</div>
+							)}
 						<div className="w-full min-w-full px-4 mt-10 prose">
-							<Blocks data={blocks}/>
+							<Blocks data={post.data.blocks}/>
 						</div>
 					</article>
 					
@@ -133,9 +133,7 @@ export const getServerSideProps = async ({ params, req, res }) => {
 
 	return {
 		props: {
-			title: post.data.title,
-			blocks: post.data.blocks,
-			datePublished: post.data.datePublished,
+			post: post,
 			user: session ? session.user : false,
 		}
 	}
