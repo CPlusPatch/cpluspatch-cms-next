@@ -196,7 +196,7 @@ const faqs = [
 
 export default function Landing({ user }) {
 	return (
-		<div className="bg-gray-50 font-['Exo_2']">
+		<div className="bg-gray-50 dark:bg-[#020918] font-['Exo_2'] duration-200">
 			<Head>
 				<title>Welcome! &middot; CPlusPatch 2022</title>
 			</Head>
@@ -272,13 +272,13 @@ export default function Landing({ user }) {
 				<div className="relative pb-16 sm:pb-24">
 					<div className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 sm:px-6 font-['Exo_2']">
 						<div className="text-left">
-							<h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+							<h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-300 sm:text-5xl md:text-6xl">
 								<span className="block">Hey,</span>
 								<span className="block text-transparent bg-gradient-to-tl from-rose-700 to-pink-600 dark:from-fuchsia-500 dark:via-red-600 dark:to-orange-400 bg-clip-text">
 									I&apos;m CPlusPatch
 								</span>
 							</h1>
-							<p className="max-w-md mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+							<p className="max-w-md mt-3 text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
 								Hey there, I&apos;m a teenager with a passion for building things.<br/>
 								I&apos;m currently most proficient in building web applications and working with JavaScript-based environments.
 							</p>
@@ -291,7 +291,7 @@ export default function Landing({ user }) {
 						className="absolute inset-0 flex flex-col"
 						aria-hidden="true">
 						<div className="flex-1" />
-						<div className="flex-1 w-full bg-gray-800" />
+						<div className="flex-1 w-full bg-gray-800 dark:bg-gray-900" />
 					</div>
 					<div className="relative px-4 mx-auto max-w-7xl sm:px-6">
 						<Image
@@ -305,7 +305,7 @@ export default function Landing({ user }) {
 					</div>
 				</div>
 			</div>
-			<div className="bg-gray-800">
+			<div className="bg-gray-800 dark:bg-gray-900">
 				<div className="px-4 py-16 mx-auto max-w-7xl sm:py-24 sm:px-6 lg:px-8">
 					<h2 className="text-sm font-semibold tracking-wide text-center text-gray-400 uppercase">
 						Tech I use most
@@ -390,12 +390,12 @@ function Languages() {
 	}, [emblaApi, onSelect, onScroll]);
 	
 	return (
-		<div className="bg-white">
+		<div className="">
 			<div className="px-4 pt-12 pb-5 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:pt-24 lg:pb-10">
 				<div className="space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0">
 					<div className="space-y-5 sm:space-y-4">
-						<h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Languages & Frameworks</h2>
-						<p className="text-xl text-gray-500">
+						<h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl dark:text-gray-200">Languages & Frameworks</h2>
+						<p className="text-xl text-gray-500 dark:text-gray-300">
 							My experience with several different programming languages, frameworks, and libraries.
 							Skill in any may vary from project to project.
 						</p>
@@ -419,7 +419,7 @@ function Languages() {
 										<div className="sm:col-span-2">
 											<div className="space-y-4">
 												<div className="space-y-1 text-lg font-medium leading-6">
-													<h3>{item.name}</h3>
+													<h3 className="dark:text-gray-200">{item.name}</h3>
 													<p>
 														<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
 															{item.type}
@@ -429,7 +429,7 @@ function Languages() {
 													
 												</div>
 												<div className="text-lg">
-													<p className="text-gray-500">{item.description}</p>
+													<p className="text-gray-500 dark:text-gray-300">{item.description}</p>
 												</div>
 											</div>
 										</div>
@@ -442,11 +442,11 @@ function Languages() {
 							<div className="bg-gradient-to-tl from-fuchsia-500 via-red-600 to-orange-400 h-2.5 rounded-sm" style={{ width: `${scrollProgress}%` }}></div>
 						</div>
 						<div className="flex justify-end mt-2">
-							<button disabled={!prevBtnEnabled} className="inline-flex items-center m-2 px-2.5 py-2.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={scrollPrev}>
+							<button disabled={!prevBtnEnabled} className="inline-flex items-center m-2 px-2.5 py-2.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none" onClick={scrollPrev}>
 								<span className="sr-only">Previous</span>
 								<ChevronLeftIcon className="w-5 h-5" aria-hidden="true"/>
 							</button>
-							<button disabled={!nextBtnEnabled} className="inline-flex items-center m-2 px-2.5 py-2.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={scrollNext}>
+							<button disabled={!nextBtnEnabled} className="inline-flex items-center m-2 px-2.5 py-2.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none" onClick={scrollNext}>
 								<span className="sr-only">Next</span>
 								<ChevronRightIcon className="w-5 h-5" aria-hidden="true"/>
 							</button>
@@ -460,10 +460,10 @@ function Languages() {
 
 function Faqs() {
 	return (
-		<div className="bg-gray-50">
+		<div className="">
 			<div className="px-4 py-12 mx-auto max-w-7xl sm:py-16 sm:px-6 lg:px-8">
 				<div className="max-w-3xl mx-auto divide-y-2 divide-gray-200">
-					<h2 className="text-3xl font-extrabold text-center text-gray-900 sm:text-4xl">
+					<h2 className="text-3xl font-extrabold text-center text-gray-900 dark:text-gray-200 sm:text-4xl">
 						Frequently asked questions
 					</h2>
 					<dl className="mt-6 space-y-6 divide-y divide-gray-200">
@@ -476,7 +476,7 @@ function Faqs() {
 									<>
 										<dt className="text-lg">
 											<Disclosure.Button className="flex items-start justify-between w-full text-left text-gray-400">
-												<span className="font-medium text-gray-900">
+												<span className="font-medium text-gray-900 dark:text-gray-300">
 													{faq.question}
 												</span>
 												<span className="flex items-center ml-6 h-7">
@@ -495,7 +495,7 @@ function Faqs() {
 										<Disclosure.Panel
 											as="dd"
 											className="pr-12 mt-2">
-											<p className="text-base text-gray-500">
+											<p className="text-base text-gray-500 dark:text-gray-400">
 												{faq.answer}
 											</p>
 										</Disclosure.Panel>
@@ -514,7 +514,7 @@ function ContactHeader() {
 	return (
 		<div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
 			<h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-				<span className="block">Wanna get in touch?</span>
+				<span className="block dark:text-gray-200">Wanna get in touch?</span>
 				<span className="block text-indigo-600">
 					Let&apos;s have a chat!
 				</span>

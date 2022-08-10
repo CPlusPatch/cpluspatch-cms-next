@@ -17,7 +17,7 @@ function classNames(...classes) {
 
 function Main({ posts, user, isAdmin }) {
 	return (
-		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">
+		<div className="bg-gray-50 dark:bg-[#020918] font-['Exo_2'] w-full min-h-screen">
 			<Head>
 				<title>Posts &middot; CPlusPatch</title>
 				<meta property="og:title" content="Example title" />
@@ -45,17 +45,17 @@ function Main({ posts, user, isAdmin }) {
 									</div>
 									<Link href={`/blog/${post.data.slug}`} prefetch={false}>
 										<a className="block mt-4">
-											<p className="text-xl font-semibold text-gray-900">
+											<p className="text-xl font-semibold text-gray-900 dark:text-gray-200">
 												{post.data.title}
 											</p>
-											<p className="mt-3 text-base text-gray-500">
+											<p className="mt-3 text-base text-gray-500 dark:text-gray-400">
 												{post.data.description}
 											</p>
 										</a>
 									</Link>
 									{isAdmin && (
 									<Link href={`/editor/${post.id}`} prefetch={false}>
-										<a className="block mt-4">
+										<a className="block mt-4 dark:text-gray-400">
 											Edit <ChevronRightIcon className="inline w-3 h-3"/>
 										</a>
 									</Link>)}
@@ -76,7 +76,7 @@ function Main({ posts, user, isAdmin }) {
 											</a>
 										</div>
 										<div className="ml-3">
-											<p className="text-sm font-medium text-gray-900">
+											<p className="text-sm font-medium text-gray-900 dark:text-gray-300">
 												<a href="#">
 													{post.user.data.name}
 												</a>

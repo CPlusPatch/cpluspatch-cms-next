@@ -4,6 +4,7 @@ import { SearchIcon } from '@heroicons/react/solid';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { signIn, signOut } from "next-auth/react";
+import DarkModeToggle from "../darkmode-toggle";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -13,14 +14,14 @@ function Navbar({ user }) {
   	return (
 		<Disclosure
 			as="nav"
-			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg bg-opacity-30 top-0 z-50 font-['Exo_2']">
+			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg dark:bg-gray-900 bg-opacity-30 top-0 z-50 font-['Exo_2']">
 			{({ open }) => (
 				<>
 					<div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
 						<div className="flex justify-between h-16">
 							<div className="flex px-2 lg:px-0">
 								<Link href={"/"} prefetch={false}>
-									<a className="flex items-center flex-shrink-0">
+									<a className="flex items-center flex-shrink-0 dark:text-gray-200">
 										<h2 className="block w-auto text-lg font-black lg:hidden">
 											CPP
 										</h2>
@@ -62,7 +63,7 @@ function Navbar({ user }) {
 										<input
 											id="search"
 											name="search"
-											className="block w-full py-2 pl-10 pr-3 leading-5 placeholder-gray-500 bg-white border border-gray-300 rounded-md focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+											className="block w-full py-2 pl-10 pr-3 leading-5 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-900 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 											placeholder="Search"
 											type="search"
 											disabled
@@ -90,23 +91,13 @@ function Navbar({ user }) {
 								</Disclosure.Button>
 							</div>
 							<div className="hidden lg:ml-4 lg:flex lg:items-center">
-								{/* <button
-									type="button"
-									className="flex-shrink-0 p-1 text-gray-400 bg-white rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-									<span className="sr-only">
-										View notifications
-									</span>
-									<BellIcon
-										className="w-6 h-6"
-										aria-hidden="true"
-									/>
-								</button> */}
+								<DarkModeToggle />
 
 								{/* Profile dropdown */}
 								{user && (
 								<Menu
 									as="div"
-									className="relative flex-shrink-0 ml-4">
+									className="relative flex-shrink-0 ml-5">
 									<div>
 										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 											<span className="sr-only">
@@ -180,7 +171,7 @@ function Navbar({ user }) {
 								{!user && (
 								<Menu
 									as="div"
-									className="relative flex-shrink-0 ml-4">
+									className="relative flex-shrink-0 ml-5">
 									<div>
 										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 											<span className="sr-only">

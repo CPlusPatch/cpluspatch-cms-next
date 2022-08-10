@@ -1,8 +1,9 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Cookies from 'cookies';
 
-export default function Document() {
+export default function MyDocument({ props }) {
 	return (
-    <Html lang='en-us'>
+    <Html lang='en-us' className={props.isDarkTheme ? "dark" : ""}>
 		<Head>
 			<link rel="preconnect" href="https://fonts.googleapis.com"/>
 			<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"/>
@@ -15,4 +16,14 @@ export default function Document() {
 		</body>
     </Html>
 	)
+}
+
+MyDocument.getInitialProps = async (ctx) => {
+	const initialProps = await Document.getInitialProps(ctx);
+	const cookies = new Cookies(ctx.req, ctx.res);
+	const isDarkTheme = cookies.get('theme') === 'dark';
+
+	return { ...initialProps, props: {
+		isDarkTheme,
+	} };
 }

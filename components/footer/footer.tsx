@@ -55,7 +55,7 @@ const navigation = [
   
 const Footer = () => {
 	return (
-		<footer className="bg-white">
+		<footer className="">
 			<div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
 				<div id="socials" className="flex justify-center space-x-6 md:order-2 focus:ring-1 ring-blue-500">
 					{navigation.map((item) => (
