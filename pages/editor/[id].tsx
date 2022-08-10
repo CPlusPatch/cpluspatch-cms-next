@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, version } from 'react';
 import Head from 'next/head';
 import Navbar from '../../components/nav/editor-nav';
 import { CheckCircleIcon, XIcon, EmojiSadIcon } from '@heroicons/react/solid';
@@ -7,6 +7,8 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import { Toaster, toast } from "react-hot-toast";
 import { GetServerSideProps } from 'next';
 import SettingsSlideOver from '../../components/editor/settings-slideover';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import firebaseStorage from "../../utils/firebase-storage";
 
 
 function Editor({ id, user }) {
@@ -34,13 +36,37 @@ function Editor({ id, user }) {
 
 				const EditorJS = (await import('@editorjs/editorjs')).default;
 				const Header = (await import('@editorjs/header')).default;
+				const Image = (await import('@editorjs/image')).default;
 				const Delimiter = (await import('@editorjs/delimiter')).default;
 				const CodeTool = (await import('@editorjs/code')).default;
 				const List = (await import('@editorjs/list')).default;
-
+				
 				setEditor(new EditorJS({
 					holder: 'editor',
 					tools: {
+						image: {
+							class: Image,
+							config: {
+								uploader: {
+									uploadByFile(file){
+										const storageRef = ref(firebaseStorage.storage, "uploads/" + file.name + "-" + Date.now());
+										// 'file' comes from the Blob or File API
+										return uploadBytes(storageRef, file).then(async (snapshot) => {
+											return {
+												success: 1,
+												file: {
+													url: await getDownloadURL(snapshot.ref),
+												}
+											};
+										});
+									},
+							
+									uploadByUrl(url){
+										// no
+									}
+								}
+							}
+						},
 						list: {
 							class: List,
 							inlineToolbar: true
