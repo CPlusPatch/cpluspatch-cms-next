@@ -487,7 +487,7 @@ function Faqs() {
 																: "rotate-0",
 															"h-6 w-6 transform duration-300 ease-in-out"
 														)}
-														aria-hidden="true" 
+														aria-hidden="true"
 													/>
 												</span>
 											</Disclosure.Button>
