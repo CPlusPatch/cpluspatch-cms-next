@@ -17,7 +17,7 @@ function classNames(...classes) {
 
 function Main({ posts, user, isAdmin }) {
 	return (
-		<div className="bg-gray-50 dark:bg-[#020918] font-['Exo_2'] w-full min-h-screen">
+		<div className="bg-gray-50 dark:bg-[#020918] font-['Exo_2'] w-full min-h-screen duration-200">
 			<Head>
 				<title>Posts &middot; CPlusPatch</title>
 				<meta property="og:title" content="Example title" />
