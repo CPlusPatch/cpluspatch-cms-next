@@ -95,14 +95,14 @@ const languages = [
 		name: "Next.js",
 		type: "Framework",
 		description: "Next.js is a React framework for server-rendered applications. It is based on React and uses React Router to handle client-side routing. It is widely used for its performance and SEO benefits.",
-		experience: "A few months",
+		experience: "Recent",
 		image: nextJs,
 	},
 	{
 		name: "Vercel",
 		type: "Framework",
 		description: "Vercel is a cloud platform for building and deploying websites. It is widely used for development because of its fast and secure CI/CD pipeline.",
-		experience: "A few months",
+		experience: "Recent",
 		image: vercel,
 	},
 	{
