@@ -98,7 +98,7 @@ const methods = {
 				id: data.id,
 				data: data.data()
 			};
-			return user;
+			return JSON.parse(JSON.stringify(user)); // Still don't know why it needs this JSOthing but it does
 		} catch (error) {
 			console.log(error)
 			return false;
@@ -106,6 +106,6 @@ const methods = {
 	},
 	getCurrentUser: async (req, res) => {
 		return JSON.parse(JSON.stringify(await unstable_getServerSession(req, res, authOptions))); // IT REFUSES TO WORK WITHOUT THAT JSON THING AGHHHAGHGAGAHAH
-	}
+	},
 }
 export default methods;
