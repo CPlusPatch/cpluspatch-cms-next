@@ -2,14 +2,15 @@ import { getProviders, signIn } from "next-auth/react";
 import Image from "next/future/image";
 import Head from "next/head";
 import Navbar from "../../components/nav/navbar";
-import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]";
+import firestore from "../../utils/firestore";
 
 import githubLogo from "../../public/static/github-black.svg";
+import discordLogo from "../../public/static/discord.png";
 import loginHero from "../../public/static/login-hero.jpg";
 
 const providerLogos = {
 	GitHub: githubLogo,
+	Discord: discordLogo,
 };
 0
 export default function SignIn({ providers, user }: { providers: Record<any, any>; user: object }) {
@@ -33,12 +34,12 @@ export default function SignIn({ providers, user }: { providers: Record<any, any
 					<h1 className="mt-12 text-xl font-bold leading-tight md:text-2xl">Log in to your account</h1>
 
 
-					<hr className="w-full my-6 border-gray-300"></hr>
+					<hr className="w-full mt-6 mb-3 border-gray-300"></hr>
 
 					{Object.values(providers).map((provider) => (
-						<button key={provider.name} onClick={() => signIn(provider.id)} type="button" className="block w-full px-4 py-3 font-semibold text-gray-900 bg-white border border-gray-300 rounded-lg">
+						<button key={provider.name} onClick={() => signIn(provider.id)} type="button" className="block w-full px-4 py-3 mt-3 font-semibold text-gray-900 bg-white border border-gray-300 rounded-lg">
 							<div className="flex items-center justify-center">
-								<Image src={providerLogos[provider.name]} className="w-6 h-6" alt=""/>
+								<Image src={providerLogos[provider.name]} className="w-6 h-6" width={24} height={24} alt=""/>
 								<span className="ml-4">Log in with {provider.name}</span>
 							</div>
 						</button>
@@ -51,9 +52,9 @@ export default function SignIn({ providers, user }: { providers: Record<any, any
 	)
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ req, res }) {
 	const providers: Record<any, any> | null = await getProviders();
-	const session = await unstable_getServerSession(context.req, context.res, authOptions);
+	const session = await firestore.getCurrentUser(req, res);
 
 	if (session) {
 		return {

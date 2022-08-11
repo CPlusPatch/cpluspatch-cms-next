@@ -1,9 +1,7 @@
 import firestore from "../../../utils/firestore";
-import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
 
 export default async function handler(req, res) {
-	const session = await unstable_getServerSession(req, res, authOptions);
+	const session = await firestore.getCurrentUser(req, res);
 
 	if (req.method === "GET") {
 		const id = req.query.id;

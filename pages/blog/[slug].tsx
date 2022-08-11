@@ -5,8 +5,7 @@ import Head from "next/head";
 import Navbar from '../../components/nav/navbar';
 import Blocks from "editorjs-blocks-react-renderer";
 import firestore from "../../utils/firestore";
-import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]";
+
 import type { DataProp } from "editorjs-blocks-react-renderer";
 
 function Article({ post, user }: {
@@ -123,7 +122,7 @@ function Aside() {
 export const getServerSideProps = async ({ params, req, res }) => {
 	const { slug } = params;
 	const post = (await firestore.getPostByFields("slug", "==", slug))[0];
-	const session = await unstable_getServerSession(req, res, authOptions);
+	const session = await firestore.getCurrentUser(req, res);
 
 	if (!post) {
 		return {

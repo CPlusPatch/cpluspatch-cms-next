@@ -130,8 +130,8 @@ function Header({ isAdmin }) {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await unstable_getServerSession(context.req, context.res, authOptions);
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+	const session = await firestore.getCurrentUser(req, res);
 	
 	let posts = (session && (session.user.admin ?? false)) ? await firestore.getPosts() :
 					await firestore.getPosts(["public", "==", true]);

@@ -3,8 +3,7 @@ import Image from 'next/future/image'
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline'
 import Head from 'next/head';
-import { authOptions } from './api/auth/[...nextauth]';
-import { unstable_getServerSession } from "next-auth/next";
+import firestore from "../utils/firestore";
 import Navbar from '../components/nav/navbar';
 import type { GetServerSideProps } from 'next';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -540,8 +539,8 @@ function ContactHeader() {
 	);
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const session = await unstable_getServerSession(context.req, context.res, authOptions);
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+	const session = await firestore.getCurrentUser(req, res);
 	
 	return {
 		props: {

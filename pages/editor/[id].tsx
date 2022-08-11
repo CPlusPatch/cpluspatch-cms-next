@@ -2,8 +2,7 @@ import React, { useState, useEffect, version } from 'react';
 import Head from 'next/head';
 import Navbar from '../../components/nav/editor-nav';
 import { CheckCircleIcon, XIcon, EmojiSadIcon } from '@heroicons/react/solid';
-import { unstable_getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]";
+import firestore from '../../utils/firestore';
 import { Toaster, toast } from "react-hot-toast";
 import { GetServerSideProps } from 'next';
 import SettingsSlideOver from '../../components/editor/settings-slideover';
@@ -213,7 +212,7 @@ function errorToast(title, message) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ params, req, res }) => {
-	const session = await unstable_getServerSession(req, res, authOptions);
+	const session = await firestore.getCurrentUser(req, res);
 
 	return {
 		props: {

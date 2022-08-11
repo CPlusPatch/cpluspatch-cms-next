@@ -1,5 +1,7 @@
 import admin from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
 
 // Initialize Firebase
 if (!admin.apps.length) {
@@ -102,5 +104,8 @@ const methods = {
 			return false;
 		}
 	},
+	getCurrentUser: async (req, res) => {
+		return JSON.parse(JSON.stringify(await unstable_getServerSession(req, res, authOptions))); // IT REFUSES TO WORK WITHOUT THAT JSON THING AGHHHAGHGAGAHAH
+	}
 }
 export default methods;
