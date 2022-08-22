@@ -541,6 +541,10 @@ function ContactHeader() {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
 	const session = await firestore.getCurrentUser(req, res);
+	res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=300, stale-while-revalidate=150'
+	)
 	
 	return {
 		props: {
