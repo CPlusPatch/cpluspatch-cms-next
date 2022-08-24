@@ -1,0 +1,32 @@
+{
+	"projectName": "CPlusPatch CMS",
+	"authorName": "Gaspard Wierzbinski",
+	"authorUsername": "CPlusPatch",
+	"socials": [
+		{
+			"name": "GitHub",
+			"href": "https://github.com/CPlusPatch",
+			"icon": "Github"
+		},
+		{
+			"name": "Discord",
+			"href": "https://discord.gg/TU5cCS6EpP",
+			"icon": "Discord"
+		},
+		{
+			"name": "E-mail",
+			"href": "mailto:contact@cpluspatch.com",
+			"icon": "Envelope"
+		},
+		{
+			"name": "Mastodon",
+			"href": "https://social.linux.pizza/web/@CPlusPatch",
+			"icon": "Mastodon"
+		},
+		{
+			"name": "StackOverflow",
+			"href": "https://stackoverflow.com/users/12187615/cpluspatch",
+			"icon": "StackOverflow"
+		}
+	]
+}
