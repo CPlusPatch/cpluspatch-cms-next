@@ -2,6 +2,9 @@
 	"projectName": "CPlusPatch CMS",
 	"authorName": "Gaspard Wierzbinski",
 	"authorUsername": "CPlusPatch",
+	"frontPage": {
+		"description": "Hey there, I'm a teenager with a passion for building things.\nI'm currently most proficient in building web applications and working with JavaScript-based environments."
+	},
 	"socials": [
 		{
 			"name": "GitHub",
@@ -27,6 +30,153 @@
 			"name": "StackOverflow",
 			"href": "https://stackoverflow.com/users/12187615/cpluspatch",
 			"icon": "StackOverflow"
+		}
+	],
+	"faq": [
+		{
+			"question": "How did you learn to code?",
+			"answer": "I'm a self taught developer, which means I learnt everything I know by being curious and reading docs. I started with Python, HTML and CSS and then moved on to JavaScript.\n\nAfter that, I went on to use PHP + MySQL, which led me to Laravel: I then learnt how to use React + Firebase, which led me to Next.js. In the process, I learnt how to use Git, and how to use JQuery. I also got sick of Bootstrap along the way and found out about TailwindCSS, which I use on everything nowadays"
+		},
+		{
+			"question": "What's your favorite language + framework combination?",
+			"answer": "Definitely Next.js + TailwindCSS + Firebase, plus Node for backends."
+		},
+		{
+			"question": "What's your favorite IDE?",
+			"answer": "Visual Studio Code is by far the best IDE I have used. It supports every language and framework thanks to extensions, and it has a great UI."
+		},
+		{
+			"question": "What do you do for a living?",
+			"answer": "I'm currently a student coding as a side hobby, and learning new things along the way!"
+		},
+		{
+			"question": "What advice would you give to new developers?",
+			"answer": "Definitely give Firebase a shot, and try to learn as much as you can. Being able to use GitHub's CI/CD pipeline efficiently is a skill that I think every developer should have: and remember, when you have an issue, the community is always here to help."
+		},
+		{
+			"question": "What's your favorite way to learn?",
+			"answer": "I like to learn by doing, so basically thinking of a project and reading docs or guides until I figure it out."
+		}
+	],
+	"languages": [
+		{
+			"name": "JavaScript",
+			"type": "Language",
+			"description": "JavaScript is a high-level, dynamic, untyped, and interpreted programming language. It is often abbreviated as JS, and is often called ECMAScript. It has been standardized in the ECMAScript specification.",
+			"experience": "Five years",
+			"image": "languages/javascript.png"
+		},
+		{
+			"name": "TypeScript",
+			"type": "Language",
+			"description": "TypeScript is a superset of JavaScript that compiles to plain JavaScript, developed by Microsoft. It is developed for large-scale applications and adds optional static typing to the language.",
+			"experience": "Recent",
+			"image": "languages/typescript.png"
+		},
+		{
+			"name": "React",
+			"type": "Framework",
+			"description": "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.",
+			"experience": "One year",
+			"image": "languages/react.png"
+		},
+		{
+			"name": "CSS",
+			"type": "Language",
+			"description": "CSS is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web.",
+			"experience": "Five years",
+			"image": "languages/css.png"
+		},
+		{
+			"name": "HTML",
+			"type": "Language",
+			"description": "HTML is the standard markup language for creating Web pages. HTML elements are the building blocks of HTML pages. HTML pages can be created by combining HTML elements to create visually rich, formatted pages.",
+			"experience": "Five years",
+			"image": "languages/html.png"
+		},
+		{
+			"name": "Firebase",
+			"type": "Framework",
+			"description": "Firebase is a cloud-based mobile and web app platform designed to help developers build apps faster. It is based on Google's JavaScript engine, AngularJS, and Google's open source cloud database, Firebase Realtime Database.",
+			"experience": "One year",
+			"image": "languages/firebase.png"
+		},
+		{
+			"name": "Node.js",
+			"type": "Runtime",
+			"description": "Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code server-side. Node.js lets developers use JavaScript to write command line tools and for server-side scripting.",
+			"experience": "Three years",
+			"image": "languages/npm.webp"
+		},
+		{
+			"name": "Next.js",
+			"type": "Framework",
+			"description": "Next.js is a React framework for server-rendered applications. It is based on React and uses React Router to handle client-side routing. It is widely used for its performance and SEO benefits.",
+			"experience": "Recent",
+			"image": "languages/nextjs.png"
+		},
+		{
+			"name": "Vercel",
+			"type": "Framework",
+			"description": "Vercel is a cloud platform for building and deploying websites. It is widely used for development because of its fast and secure CI/CD pipeline.",
+			"experience": "Recent",
+			"image": "languages/vercel.png"
+		},
+		{
+			"name": "TailwindCSS",
+			"type": "Framework",
+			"description": "Tailwind CSS is a utility-first CSS framework for rapid UI development. It is designed for use with React and React Native.",
+			"experience": "One year",
+			"image": "languages/tailwindcss.jpg"
+		},
+		{
+			"name": "Github",
+			"type": "Tool",
+			"description": "Github is a web-based Git repository hosting service, used for version control and code collaboration. It is developed by GitHub, Inc. (owned by Microsoft)",
+			"experience": "Four years",
+			"image": "languages/github.jpg"
+		},
+		{
+			"name": "Python",
+			"type": "Language",
+			"description": "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace.",
+			"experience": "Six years",
+			"image": "languages/python.png"
+		},
+		{
+			"name": "Discord.js",
+			"type": "Framework",
+			"description": "Discord.js is a JavaScript library for building rich and interactive chat applications. It is based on the Discord API and uses websockets to communicate with the Discord servers.",
+			"experience": "One year",
+			"image": "languages/discord.png"
+		},
+		{
+			"name": "PHP",
+			"type": "Language",
+			"description": "PHP is a server-side scripting language designed for web development but also used as a general-purpose programming language. PHP is a popular general-purpose programming language originally created by Rasmus Lerdorf in 1994.",
+			"experience": "Four years",
+			"image": "languages/php.png"
+		},
+		{
+			"name": "Laravel",
+			"type": "Framework",
+			"description": "Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern.",
+			"experience": "Three years",
+			"image": "languages/laravel.png"
+		},
+		{
+			"name": "Git",
+			"type": "Tool",
+			"description": "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.",
+			"experience": "Four years",
+			"image": "languages/git.png"
+		},
+		{
+			"name": "JQuery",
+			"type": "Framework",
+			"description": "JQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy to use API that works across a multitude of browsers.",
+			"experience": "Four years",
+			"image": "languages/jquery.png"
 		}
 	]
 }

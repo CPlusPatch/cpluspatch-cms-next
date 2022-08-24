@@ -7,6 +7,9 @@ import firestore from "../utils/firestore";
 import Navbar from '../components/nav/navbar';
 import type { GetServerSideProps } from 'next';
 import useEmblaCarousel from 'embla-carousel-react';
+import nl2br from "react-nl2br";
+
+import branding from "../config/branding.json";
 
 import mainHero from "../public/static/banner.png";
 import firebaseLogo from '../public/static/firebase.svg';
@@ -15,189 +18,17 @@ import vercelLogo from '../public/static/vercel.svg';
 import githubLogo from '../public/static/github.svg';
 import tailwindLogo from '../public/static/tailwindcss.svg';
 
-// Languages & Frameworks images
-
-import javascript from '../public/static/languages/javascript.png';
-import typescript from '../public/static/languages/typescript.png';
-import react from '../public/static/languages/react.png';
-import css from '../public/static/languages/css.png';
-import html from '../public/static/languages/html.png';
-import firebase from '../public/static/languages/firebase.png';
-import nextJs from '../public/static/languages/nextjs.png';
-import vercel from '../public/static/languages/vercel.png';
-import tailwindcss from '../public/static/languages/tailwindcss.jpg';
-import github from '../public/static/languages/github.jpg';
-import python from '../public/static/languages/python.png';
-import discord from '../public/static/languages/discord.png';
-import php from '../public/static/languages/php.png';
-import laravel from '../public/static/languages/laravel.png';
-import git from '../public/static/languages/git.png';
-import jquery from '../public/static/languages/jquery.png';
-import npm from '../public/static/languages/npm.webp';
 import Footer from '../components/footer/footer';
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-const languages = [
-	{
-		name: 'JavaScript',
-		type: 'Language',
-		description: 'JavaScript is a high-level, dynamic, untyped, and interpreted programming language. It is often abbreviated as JS, and is often called ECMAScript. It has been standardized in the ECMAScript specification.',
-		experience: "Five years",
-		image: javascript,
-	},
-	{
-		name: "TypeScript",
-		type: "Language",
-		description: "TypeScript is a superset of JavaScript that compiles to plain JavaScript, developed by Microsoft. It is developed for large-scale applications and adds optional static typing to the language.",
-		experience: "Recent",
-		image: typescript,
-	},
-	{
-		name: 'React',
-		type: 'Framework',
-		description: 'React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.',
-		experience: "One year",
-		image: react,
-	},
-	{
-		name: 'CSS',
-		type: 'Language',
-		description: 'CSS is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web.',
-		experience: "Five years",
-		image: css,
-	},
-	{
-		name: 'HTML',
-		type: 'Language',
-		description: 'HTML is the standard markup language for creating Web pages. HTML elements are the building blocks of HTML pages. HTML pages can be created by combining HTML elements to create visually rich, formatted pages.',
-		experience: "Five years",
-		image: html,
-	},
-	{
-		name: 'Firebase',
-		type: 'Framework',
-		description: 'Firebase is a cloud-based mobile and web app platform designed to help developers build apps faster. It is based on Google\'s JavaScript engine, AngularJS, and Google\'s open source cloud database, Firebase Realtime Database.',
-		experience: "One year",
-		image: firebase,
-	},
-	{
-		name: 'Node.js',
-		type: 'Runtime',
-		description: 'Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code server-side. Node.js lets developers use JavaScript to write command line tools and for server-side scripting.',
-		experience: "Three years",
-		image: npm,
-	},
-	{
-		name: "Next.js",
-		type: "Framework",
-		description: "Next.js is a React framework for server-rendered applications. It is based on React and uses React Router to handle client-side routing. It is widely used for its performance and SEO benefits.",
-		experience: "Recent",
-		image: nextJs,
-	},
-	{
-		name: "Vercel",
-		type: "Framework",
-		description: "Vercel is a cloud platform for building and deploying websites. It is widely used for development because of its fast and secure CI/CD pipeline.",
-		experience: "Recent",
-		image: vercel,
-	},
-	{
-		name: "TailwindCSS",
-		type: "Framework",
-		description: "Tailwind CSS is a utility-first CSS framework for rapid UI development. It is designed for use with React and React Native.",
-		experience: "One year",
-		image: tailwindcss,
-	},
-	{
-		name: "Github",
-		type: "Tool",
-		description: "Github is a web-based Git repository hosting service, used for version control and code collaboration. It is developed by GitHub, Inc. (owned by Microsoft)",
-		experience: "Four years",
-		image: github,
-	},
-	{
-		name: "Python",
-		type: "Language",
-		description: "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace.",
-		experience: "Six years",
-		image: python,
-	},
-	{
-		name: "Discord.js",
-		type: "Framework",
-		description: "Discord.js is a JavaScript library for building rich and interactive chat applications. It is based on the Discord API and uses websockets to communicate with the Discord servers.",
-		experience: "One year",
-		image: discord,
-	},
-	{
-		name: "PHP",
-		type: "Language",
-		description: "PHP is a server-side scripting language designed for web development but also used as a general-purpose programming language. PHP is a popular general-purpose programming language originally created by Rasmus Lerdorf in 1994.",
-		experience: "Four years",
-		image: php,
-	},
-	{
-		name: "Laravel",
-		type: "Framework",
-		description: "Laravel is a free, open-source PHP web framework, created by Taylor Otwell and intended for the development of web applications following the model–view–controller (MVC) architectural pattern.",
-		experience: "Three years",
-		image: laravel,
-	},
-	{
-		name: "Git",
-		type: "Tool",
-		description: "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.",
-		experience: "Four years",
-		image: git,
-	},
-	{
-		name: "JQuery",
-		type: "Framework",
-		description: "JQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy to use API that works across a multitude of browsers.",
-		experience: "Four years",
-		image: jquery,
-	},
-];
-
-const faqs = [
-	{
-		question: "How did you learn to code?",
-		answer: <>
-			I&apos;m a self taught developer, which means I learnt everything I know by being curious and reading docs. I started with Python, HTML and CSS and then moved on to JavaScript.
-			<br/><br/>
-			After that, I went on to use PHP + MySQL, which led me to Laravel: I then learnt how to use React + Firebase, which led me to Next.js. In the process, I learnt how to use Git, and how to use JQuery. I also got sick of Bootstrap along the way and found out about TailwindCSS, which I use on everything nowadays
-		</>,
-	},
-	{
-		question: "What's your favorite language + framework combination?",
-		answer: "Definitely Next.js + TailwindCSS + Firebase, plus Node for backends.",
-	},
-	{
-		question: "What's your favorite IDE?",
-		answer: "Visual Studio Code is by far the best IDE I have used. It supports every language and framework thanks to extensions, and it has a great UI.",
-	},
-	{
-		question: "What do you do for a living?",
-		answer: "I'm currently a student coding as a side hobby, and learning new things along the way!"
-	},
-	{
-		question: "What advice would you give to new developers?",
-		answer: "Definitely give Firebase a shot, and try to learn as much as you can. Being able to use GitHub's CI/CD pipeline efficiently is a skill that I think every developer should have: and remember, when you have an issue, the community is always here to help."
-	},
-	{
-		question: "What's your favorite way to learn?",
-		answer: "I like to learn by doing, so basically thinking of a project and reading docs or guides until I figure it out.",
-	},
-];
-
 export default function Landing({ user }) {
 	return (
 		<div className="bg-gray-50 dark:bg-[#020918] font-['Exo_2'] duration-200">
 			<Head>
-				<title>Welcome! &middot; CPlusPatch</title>
+				<title>Welcome! &middot; {branding.authorUsername}</title>
 			</Head>
 			<Navbar user={user}/>
 			<div className="relative overflow-hidden">
@@ -274,12 +105,11 @@ export default function Landing({ user }) {
 							<h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-300 sm:text-5xl md:text-6xl">
 								<span className="block">Hey,</span>
 								<span className="block text-transparent bg-gradient-to-tl from-rose-700 to-pink-600 dark:from-fuchsia-500 dark:via-red-600 dark:to-orange-400 bg-clip-text">
-									I&apos;m CPlusPatch
+									I&apos;m {branding.authorUsername}
 								</span>
 							</h1>
 							<p className="max-w-md mt-3 text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-								Hey there, I&apos;m a teenager with a passion for building things.<br/>
-								I&apos;m currently most proficient in building web applications and working with JavaScript-based environments.
+								{nl2br(branding.frontPage.description)}
 							</p>
 						</div>
 					</div>
@@ -403,13 +233,13 @@ function Languages() {
 						<div ref={emblaRef}>
 							<ul role="list"
 								className="flex space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0" >
-								{languages.map((item) => (
+								{branding.languages.map((item) => (
 								<li key={item.name} className="sm:py-8" style={{flex: "0 0 100%"}}>
 									<div className="space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0">
 										<div className="flex items-center justify-center">
 											<Image
 												className="object-cover w-3/5 rounded-lg shadow-lg md:w-full aspect-1"
-												src={item.image}
+												src={require("../public/static/" + item.image).default}
 												alt=""
 												placeholder='blur'
 												sizes='(max-width: 100px) 50px, (max-width: 200px) 150px, (max-width: 300px) 250px, 400px'
@@ -466,7 +296,7 @@ function Faqs() {
 						Frequently asked questions
 					</h2>
 					<dl className="mt-6 space-y-6 divide-y divide-gray-200">
-						{faqs.map((faq) => (
+						{branding.faq.map((faq) => (
 							<Disclosure
 								as="div"
 								key={faq.question}
@@ -476,7 +306,7 @@ function Faqs() {
 										<dt className="text-lg">
 											<Disclosure.Button className="flex items-start justify-between w-full text-left text-gray-400">
 												<span className="font-medium text-gray-900 dark:text-gray-300">
-													{faq.question}
+													{nl2br(faq.question)}
 												</span>
 												<span className="flex items-center ml-6 h-7">
 													<ChevronDownIcon
@@ -503,7 +333,7 @@ function Faqs() {
 												as="dd"
 												className="pr-12 mt-2">
 												<p className="text-base text-gray-500 dark:text-gray-400">
-													{faq.answer}
+													{nl2br(faq.answer)}
 												</p>
 											</Disclosure.Panel>
 										</Transition>
