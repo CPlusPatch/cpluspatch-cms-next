@@ -1,34 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<h1 align="center">
+  CPlusPatch CMS Next
+</h1>
 
-First, run the development server:
+<h4 align="center">A work-in-progress CMS system built on top of Next.js and TailwindCSS</h4>
+
+<p align="center">
+	<img src="https://img.shields.io/badge/firebase-%23FF6600.svg?&style=for-the-badge&logo=firebase&logoColor=white">
+ 	<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
+	<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
+	<img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white">
+	<img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
+	<img src="https://img.shields.io/badge/manjaro-35BF5C?style=for-the-badge&logo=manjaro&logoColor=white">
+</p>
+
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Install</a> •
+  <a href="#credits">Credits</a> •
+  <a href="#license">License</a>
+</p>
+
+![screenshot](https://i.imgur.com/XttQ8nD.png)
+![screenshot](https://i.imgur.com/SEwjHHP.png)
+![screenshot](https://i.imgur.com/IB7asZe.png)
+![screenshot](https://i.imgur.com/lsaxw3u.png)
+![screenshot](https://i.imgur.com/CQkd0Oc.png)
+
+## Key Features
+
+* Lightning-fast, responsive and secure
+* Server-side rendering allowing for smaller JS payloads and better website metrics
+* Intuitive block-styled editor powered by EditorJS
+* OAuth-based authentication, uses providers such as GitHub as sign-in methods
+
+## How To Install
+
+Install Node.js (version 16 is recommended for this project) and Git, then clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
+# Clone this repository
+$ git clone https://github.com/cpluspatch/cpluspatch-cms-next.git
+
+# Go into the repository
+$ cd cpluspatch-cms-next
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Linking Firebase
+WIP
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Credits
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+This software uses the following open source libraries, as well as several NPM packages:
 
-## Learn More
+- [Next.js](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [next-auth](https://next-auth.js.org/)
+- [Node.js](https://nodejs.org/)
+- [EditorJS](https://editorjs.io/)
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+MIT
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+---
