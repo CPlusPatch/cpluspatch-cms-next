@@ -1,11 +1,11 @@
-import React, { useState, useEffect, version } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Navbar from '../../components/nav/editor-nav';
+import EditorNavbar from '../../components/nav/EditorNavbar';
 import { CheckCircleIcon, XIcon, EmojiSadIcon } from '@heroicons/react/solid';
 import firestore from '../../utils/firestore';
 import { Toaster, toast } from "react-hot-toast";
 import { GetServerSideProps } from 'next';
-import SettingsSlideOver from '../../components/editor/settings-slideover';
+import SettingsSlideOver from '../../components/editor/SettingsSlideover';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import firebaseStorage from "../../utils/firebase-storage";
 
@@ -124,23 +124,23 @@ function Editor({ id, user }) {
 	}
 
 	return (
-		<div className="bg-gray-50 font-['Inter'] w-full min-h-screen">
+		<div className="bg-gray-50 font-['Inter'] w-full min-h-screen duration-200">
 			<Head>
 				<title>
 					{title}
 				</title>
 			</Head>
 			<Toaster/>
-			<Navbar user={user} onSave={saveData} isSaving={isSaving} onTitleChange={(title) => {
+			<EditorNavbar user={user} onSave={saveData} isSaving={isSaving} onTitleChange={(title) => {
 				setTitle(title);
 			}} title={title} setSidebarOpen={setSidebarOpen}/>
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
 				<div className="w-full h-full mt-8 md:mt-8 lg:mt-16">
-					<article className="w-full h-full max-w-3xl mx-auto md:px-0">
+					<div className="w-full h-full max-w-3xl mx-auto md:px-0">
 						<div className="w-full min-w-full px-4 mt-10 prose">
-							<div id="editor" className="w-full h-full"></div>
+							<div id="editor" className="w-full h-full text-black font-['Inter']"></div>
 						</div>
-					</article>
+					</div>
 				</div>
 			</div>
 			<SettingsSlideOver open={sidebarOpen} setOpen={setSidebarOpen} isPublic={isPublic} description={description} banner={banner} setDescription={setDescription} setIsPublic={setIsPublic} setBanner={setBanner}/>

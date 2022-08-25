@@ -31,7 +31,7 @@ function Article({ post, user }: {
 								<img src={post.data.banner} alt=""/>
 							</div>
 							)}
-						<div className="w-full min-w-full px-4 mt-10 prose">
+						<div className="w-full min-w-full px-4 mt-10 prose text-gray-700">
 							<Blocks data={post.data.blocks}/>
 						</div>
 					</article>

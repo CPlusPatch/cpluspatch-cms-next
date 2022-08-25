@@ -7,9 +7,13 @@ module.exports = {
 	],
 	theme: {
 		extend: {},
+		nightwind: {
+			typography: true
+		}
 	},
 	plugins: [
 		require("@tailwindcss/typography"),
 		require("@tailwindcss/aspect-ratio"),
+		require("nightwind"),
 	],
 }

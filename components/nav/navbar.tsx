@@ -14,19 +14,19 @@ function Navbar({ user }) {
   	return (
 		<Disclosure
 			as="nav"
-			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg dark:bg-gray-900 bg-opacity-30 top-0 z-50 font-['Exo_2']">
+			className="bg-white shadow sticky backdrop-filter backdrop-blur-lg darkfalse:bg-gray-900 bg-opacity-30 top-0 z-50 font-['Exo_2']">
 			{({ open }) => (
 				<>
 					<div className="px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
 						<div className="flex justify-between h-16">
 							<div className="flex px-2 lg:px-0">
 								<Link href={"/"} prefetch={false}>
-									<a className="flex items-center flex-shrink-0 dark:text-gray-200">
+									<a className="flex items-center flex-shrink-0 darkfalse:text-gray-200">
 										<h2 className="block w-auto text-lg font-black lg:hidden">
 											CPP
 										</h2>
 										<h2 className="hidden w-auto text-lg font-black tracking-normal lg:block text-brand-primary">
-											<span className="bg-gradient-to-r from-sky-400 to-blue-500 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_10px] group-hover:bg-[length:100%_10px]">
+											<span className="bg-gradient-to-r from-sky-400 to-blue-500 bg-[length:0px_10px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_10px] group-hover:bg-[length:100%_10px] text-black">
 												CPLUSPATCH
 											</span>
 										</h2>
@@ -63,7 +63,7 @@ function Navbar({ user }) {
 										<input
 											id="search"
 											name="search"
-											className="block w-full py-2 pl-10 pr-3 leading-5 placeholder-gray-500 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:border-gray-900 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+											className="block w-full py-2 pl-10 pr-3 leading-5 placeholder-gray-500 bg-white border border-gray-300 rounded-md darkfalse:bg-gray-800 darkfalse:border-gray-900 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 											placeholder="Search"
 											type="search"
 											disabled
@@ -92,25 +92,25 @@ function Navbar({ user }) {
 							</div>
 							<div className="hidden lg:ml-4 lg:flex lg:items-center">
 								<DarkModeToggle />
-
+								
 								{/* Profile dropdown */}
-								{user && (
+						
 								<Menu
 									as="div"
-									className="relative flex-shrink-0 ml-5">
+									className="relative flex-shrink-0 ml-4">
 									<div>
 										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 											<span className="sr-only">
 												Open user menu
 											</span>
-												{/* eslint-disable-next-line @next/next/no-img-element */}
-												<img
-													className="w-8 h-8 rounded-md"
-													src={user.image}
-													alt=""
-													width={32}
-													height={32}
-												/>
+											{/* eslint-disable-next-line @next/next/no-img-element */}
+											<img
+												className="w-8 h-8 rounded-md"
+												src={user ? user.image : "https://gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
+												alt=""
+												width={32}
+												height={32}
+											/>
 										</Menu.Button>
 									</div>
 									<Transition
@@ -121,6 +121,7 @@ function Navbar({ user }) {
 										leave="transition ease-in duration-75"
 										leaveFrom="transform opacity-100 scale-100"
 										leaveTo="transform opacity-0 scale-95">
+										{user ?
 										<Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 											<Menu.Item>
 												{({ active }) => (
@@ -164,37 +165,7 @@ function Navbar({ user }) {
 													</button>
 												)}
 											</Menu.Item>
-										</Menu.Items>
-									</Transition>
-								</Menu>
-								)}
-								{!user && (
-								<Menu
-									as="div"
-									className="relative flex-shrink-0 ml-5">
-									<div>
-										<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-											<span className="sr-only">
-												Open user menu
-											</span>
-												{/* eslint-disable-next-line @next/next/no-img-element */}
-												<img
-													className="w-8 h-8 rounded-md"
-													src="https://gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
-													alt=""
-													width={32}
-													height={32}
-												/>
-										</Menu.Button>
-									</div>
-									<Transition
-										as={Fragment}
-										enter="transition ease-out duration-100"
-										enterFrom="transform opacity-0 scale-95"
-										enterTo="transform opacity-100 scale-100"
-										leave="transition ease-in duration-75"
-										leaveFrom="transform opacity-100 scale-100"
-										leaveTo="transform opacity-0 scale-95">
+										</Menu.Items> :
 										<Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 											<Menu.Item>
 												{({ active }) => (
@@ -210,10 +181,9 @@ function Navbar({ user }) {
 													</button>
 												)}
 											</Menu.Item>
-										</Menu.Items>
+										</Menu.Items>}
 									</Transition>
 								</Menu>
-								)}
 							</div>
 						</div>
 					</div>
