@@ -1,6 +1,14 @@
 import firestore from "../../utils/firestore";
 
 export default async function handler(req, res) {
+	const session = await firestore.getCurrentUser(req, res);
+	if (!(session && (session.user.admin ?? false))) {
+		return res.status(401).json({
+			success: false,
+			error: "Unauthorized action"
+		})
+	}
+
 	const currentTime = Date.now();
 	const slug = (Math.floor(Math.random() * (9999999999 - 1000000000 + 1)) + 1000000000).toString() + "-brand-new-post";
 	const data = {
