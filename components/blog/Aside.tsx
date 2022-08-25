@@ -37,7 +37,7 @@ export function Aside() {
 						</dt>
 						<dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
 							<p>
-								Teenager that likes coding and playing games. I&pos;m a big fan of open-source software and I&apos;m always looking for new ways to improve my work.
+								Teenager that likes coding and playing games. I&apos;m a big fan of open-source software and I&apos;m always looking for new ways to improve my work.
 								<br />
 								Fun fact: this website has been rewritten 5 times with different technologies.
 							</p>
