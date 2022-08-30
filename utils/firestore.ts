@@ -28,8 +28,8 @@ const methods = {
 	getPosts: async (fields: any[] | boolean = false) => {
 		let posts = [];
 		let data = fields ? 
-			await postsRef.where(fields[0], fields[1], fields[2]).orderBy("dateCreated", "desc").get() :
-			await postsRef.orderBy("dateCreated", "desc").get();
+			await postsRef.where(fields[0], fields[1], fields[2]).orderBy("dateLastEdited", "desc").get() :
+			await postsRef.orderBy("dateLastEdited", "desc").get();
 		
 		data.forEach((doc) => {
 			posts.push({

@@ -18,69 +18,78 @@ function Main({ posts, user, isAdmin }) {
 				<title>Posts &middot; CPlusPatch</title>
 				<meta property="og:title" content="Example title" />
 			</Head>
-			<Navbar user={user}/>
+			<Navbar user={user} />
 			<div className="relative w-full h-full max-w-6xl px-5 mx-auto">
 				<main className="mt-14">
-					<div className="divide-y divide-gray-700">
-						<Header isAdmin={isAdmin} />
-						<div className="grid pt-12 mt-12 divide-y md:divide-none gap-x-16 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12 divide-gray-70 gap-y-10">
+					<div className="relative mx-auto max-w-7xl">
+						<div className="text-center">
+							<h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+								From the blog
+							</h2>
+							<p className="max-w-2xl mx-auto mt-3 text-xl text-gray-500 sm:mt-4">
+								Test blog for CCMS2
+							</p>
+						</div>
+						<div className="grid max-w-lg gap-5 mx-auto mt-12 lg:grid-cols-3 lg:max-w-none">
 							{posts.map((post) => (
-								<div key={post.id} className="pt-6 md:mt-0">
-									<div>
-										<a
-											href="/category/article"
-											className="inline-block">
-											<span
-												className={classNames(
-													"bg-indigo-100 text-indigo-800",
-													"inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium"
-												)}>
-												Article
-											</span>
-										</a>
+								<div
+									key={post.id}
+									className="flex flex-col overflow-hidden rounded-lg shadow-lg">
+									<div className="flex-shrink-0">
+										
+										{/* eslint-disable-next-line @next/next/no-img-element */}
+										<img
+											className="object-cover w-full h-48"
+											src={post.data.banner || undefined}
+											alt=""
+										/>
 									</div>
-									<Link href={`/blog/${post.data.slug}`} prefetch={false}>
-										<a className="block mt-4">
-											<p className="text-xl font-semibold text-gray-900 darkfalse:text-gray-200">
-												{post.data.title}
-											</p>
-											<p className="mt-3 text-base text-gray-500 darkfalse:text-gray-400">
-												{post.data.description}
-											</p>
-										</a>
-									</Link>
-									{isAdmin && (
-									<Link href={`/editor/${post.id}`} prefetch={false}>
-										<a className="block mt-4 text-gray-600">
-											Edit <ChevronRightIcon className="inline w-3 h-3"/>
-										</a>
-									</Link>)}
-									<div className="flex items-center mt-6">
-										<div className="flex-shrink-0">
-											<a href="#">
-												<span className="sr-only">
-													{post.user.data.name}
-												</span>
-												{/* eslint-disable-next-line @next/next/no-img-element */}
-												<img
-													className="w-10 h-10 rounded-md"
-													src={post.user.data.image}
-													alt=""
-													width={40}
-													height={40}
-												/>
-											</a>
-										</div>
-										<div className="ml-3">
-											<p className="text-sm font-medium text-gray-900 darkfalse:text-gray-300">
-												<a href="#">
-													{post.user.data.name}
+									<div className="flex flex-col justify-between flex-1 p-6 bg-white">
+										<div className="flex-1">
+											<p className="text-sm font-medium text-indigo-600">
+												<a
+													href="#"
+													className="hover:underline">
+														Sus
 												</a>
 											</p>
-											<div className="flex space-x-1 text-sm text-gray-500">
-												<time dateTime={post.data.dateLastEdited} >
-													{moment(post.data.dateLastEdited).fromNow()}
-												</time>
+											<Link href={`/blog/${post.data.slug}`} prefetch={false}>
+											<a
+												className="block mt-2">
+												<p className="text-xl font-semibold text-gray-900">
+													{post.data.title}
+												</p>
+												<p className="mt-3 text-base text-gray-500">
+													{post.data.description}
+												</p>
+											</a>
+											</Link>
+										</div>
+										<div className="flex items-center mt-6">
+											<div className="flex-shrink-0">
+												<a href="#">
+													<span className="sr-only">
+														{post.user.data.name}
+													</span>
+													{/* eslint-disable-next-line @next/next/no-img-element */}
+													<img className="w-10 h-10 rounded-full"
+														src={post.user.data.image}
+														alt=""
+													/>
+												</a>
+											</div>
+											<div className="ml-3">
+												<p className="text-sm font-medium text-gray-900">
+													<a href="#" className="hover:underline">
+														{post.user.data.name}
+													</a>
+												</p>
+												<div className="flex space-x-1 text-sm text-gray-500">
+													<time
+														dateTime={post.data.dateLastEdited}>
+														{moment(post.data.dateLastEdited).fromNow()}
+													</time>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -130,7 +139,7 @@ export const getServerSideProps = async ({ req, res }) => {
 	const session = await firestore.getCurrentUser(req, res);
 	
 	let posts = (session && (session.user.admin ?? false)) ? await firestore.getPosts() :
-					await firestore.getPosts(["public", "==", true]);
+		await firestore.getPosts(["public", "==", true]);
 	if (posts) {
 		posts = await Promise.all(posts.map(async (post) => {
 			post.user = await firestore.getUserById(post.data.author);
