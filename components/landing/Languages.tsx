@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import Image from 'next/future/image';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import useEmblaCarousel from 'embla-carousel-react';
 import branding from "../../config/branding.json";
 

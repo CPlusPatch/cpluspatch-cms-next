@@ -65,3 +65,18 @@ a {
 .animate-leave {
 	animation: leave .15s ease-in forwards
 }
+
+@font-face {
+	font-family: "Blender Pro Bold";
+	src: url("../public/assets/fonts/Blender-Pro-Bold.ttf");
+}
+
+@font-face {
+	font-family: "Cygun Regular";
+	src: url("../public/assets/fonts/CYGUN-Regular.ttf");
+}
+
+.cyber-btn-clip:after, .cyber-btn-clip:before {
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 70%);
+
+}

@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   	reactStrictMode: false,
-	experimental: {
-		images: {
-            allowFutureImage: true
-        }
-	},
+	swcMinify: true,
+	compress: true,
 }
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({

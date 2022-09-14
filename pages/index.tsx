@@ -17,6 +17,7 @@ import tailwindLogo from '../public/static/tailwindcss.svg';
 import { Languages } from "../components/landing/Languages";
 import { Faqs } from "../components/landing/Faqs";
 import { ContactHeader } from "../components/landing/ContactHeader";
+import CyberButton from "../components/buttons/CyberButton";
 
 export function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
@@ -24,7 +25,7 @@ export function classNames(...classes) {
 
 export default function Landing({ user }) {
 	return (
-		<div className="bg-gray-50 dark:bg-[#020918] font-['Exo_2'] duration-200">
+		<div className="bg-gray-50 dark:bg-[#020918] font-exo duration-200">
 			<Head>
 				<title>Welcome! &middot; {branding.authorUsername}</title>
 			</Head>
@@ -98,7 +99,7 @@ export default function Landing({ user }) {
 				</div>
 
 				<div className="relative pb-16 sm:pb-24">
-					<div className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24 sm:px-6 font-['Exo_2']">
+					<div className="px-4 mx-auto mt-16 max-w-7xl sm:mt-24 sm:px-6 font-exo">
 						<div className="text-left">
 							<h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-gray-300 sm:text-5xl md:text-6xl">
 								<span className="block">Hey,</span>
@@ -180,7 +181,6 @@ export default function Landing({ user }) {
 			</div>
 			<Languages/>
 			<Faqs/>
-			<ContactHeader/>
 			<Footer/>
 		</div>
 	);

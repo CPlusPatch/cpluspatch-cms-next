@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import EditorNavbar from '../../components/nav/EditorNavbar';
-import { CheckCircleIcon, XIcon, EmojiSadIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon, XMarkIcon, FaceFrownIcon } from '@heroicons/react/24/solid';
 import firestore from '../../utils/firestore';
 import { Toaster, toast } from "react-hot-toast";
 import { GetServerSideProps } from 'next';
@@ -39,6 +39,7 @@ function Editor({ id, user }) {
 				const Delimiter = (await import('@editorjs/delimiter')).default;
 				const CodeTool = (await import('@editorjs/code')).default;
 				const List = (await import('@editorjs/list')).default;
+				const BoldTool = (await import("../../components/editor/BoldTool")).default;
 				
 				setEditor(new EditorJS({
 					holder: 'editor',
@@ -70,6 +71,7 @@ function Editor({ id, user }) {
 							class: List,
 							inlineToolbar: true
 						},
+						bold: BoldTool,
 						header: Header,
 						delimiter: Delimiter,
 						code: CodeTool
@@ -133,7 +135,7 @@ function Editor({ id, user }) {
 			<Toaster/>
 			<EditorNavbar user={user} onSave={saveData} isSaving={isSaving} onTitleChange={(title) => {
 				setTitle(title);
-			}} title={title} setSidebarOpen={setSidebarOpen}/>
+			}} title={title} setSidebarOpen={setSidebarOpen} editor={editor}/>
 			<div className="relative w-full h-full mx-auto max-w-6xl font-['Inter']">
 				<div className="w-full h-full mt-8 md:mt-8 lg:mt-16">
 					<div className="w-full h-full max-w-3xl mx-auto md:px-0">
@@ -167,7 +169,7 @@ function saveToast() {
 				 onClick={() => toast.dismiss(t.id)}
 			   >
 				 <span className="sr-only">Close</span>
-				 <XIcon className="w-5 h-5" aria-hidden="true" />
+				 <XMarkIcon className="w-5 h-5" aria-hidden="true" />
 			   </button>
 			 </div>
 		   </div>
@@ -187,7 +189,7 @@ function errorToast(title, message) {
 		 <div className="p-4">
 		   <div className="flex items-start">
 			 <div className="flex-shrink-0">
-			   <EmojiSadIcon className="w-6 h-6 text-gray-200" aria-hidden="true" />
+			   <FaceFrownIcon className="w-6 h-6 text-gray-200" aria-hidden="true" />
 			 </div>
 			 <div className="ml-3 w-0 flex-1 pt-0.5">
 			   <p className="text-sm font-normal text-gray-100">{title}</p>
@@ -199,7 +201,7 @@ function errorToast(title, message) {
 				 onClick={() => toast.dismiss(t.id)}
 			   >
 				 <span className="sr-only">Close</span>
-				 <XIcon className="w-5 h-5" aria-hidden="true" />
+				 <XMarkIcon className="w-5 h-5" aria-hidden="true" />
 			   </button>
 			 </div>
 		   </div>

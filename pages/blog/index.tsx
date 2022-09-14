@@ -4,7 +4,7 @@ import Navbar from '../../components/nav/navbar';
 import firestore from "../../utils/firestore";
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { ChevronRightIcon } from '@heroicons/react/outline';
+import { ChevronRightIcon } from '@heroicons/react/24/outline';
 import moment from "moment";
 
 function classNames(...classes) {
@@ -36,7 +36,6 @@ function Main({ posts, user, isAdmin }) {
 									key={post.id}
 									className="flex flex-col overflow-hidden rounded-lg shadow-lg">
 									<div className="flex-shrink-0">
-										
 										{/* eslint-disable-next-line @next/next/no-img-element */}
 										<img
 											className="object-cover w-full h-48"
@@ -50,19 +49,26 @@ function Main({ posts, user, isAdmin }) {
 												<a
 													href="#"
 													className="hover:underline">
-														Sus
+													Sus
 												</a>
 											</p>
-											<Link href={`/blog/${post.data.slug}`} prefetch={false}>
-											<a
-												className="block mt-2">
-												<p className="text-xl font-semibold text-gray-900">
-													{post.data.title}
-												</p>
-												<p className="mt-3 text-base text-gray-500">
-													{post.data.description}
-												</p>
-											</a>
+											<Link
+												href={`/blog/${post.data.slug}`}
+												prefetch={false}>
+												<a className="block mt-2">
+													<p className="text-xl font-semibold text-gray-900">
+														{post.data.title}
+													</p>
+													<p className="mt-3 text-base text-gray-500">
+														{post.data.description}
+													</p>
+													<Link href={"/editor/" + post.id}>
+														<a className="flex flex-row items-center mt-4 text-sm">
+															Edit{" "}
+															<ChevronRightIcon className="w-3 h-3 align-baseline" />
+														</a>
+													</Link>
+												</a>
 											</Link>
 										</div>
 										<div className="flex items-center mt-6">
@@ -72,22 +78,33 @@ function Main({ posts, user, isAdmin }) {
 														{post.user.data.name}
 													</span>
 													{/* eslint-disable-next-line @next/next/no-img-element */}
-													<img className="w-10 h-10 rounded-full"
-														src={post.user.data.image}
+													<img
+														className="w-10 h-10 rounded-full"
+														src={
+															post.user.data.image
+														}
 														alt=""
 													/>
 												</a>
 											</div>
 											<div className="ml-3">
 												<p className="text-sm font-medium text-gray-900">
-													<a href="#" className="hover:underline">
+													<a
+														href="#"
+														className="hover:underline">
 														{post.user.data.name}
 													</a>
 												</p>
 												<div className="flex space-x-1 text-sm text-gray-500">
 													<time
-														dateTime={post.data.dateLastEdited}>
-														{moment(post.data.dateLastEdited).fromNow()}
+														dateTime={
+															post.data
+																.dateLastEdited
+														}>
+														{moment(
+															post.data
+																.dateLastEdited
+														).fromNow()}
 													</time>
 												</div>
 											</div>

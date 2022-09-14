@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
-import { LinkIcon, PlusSmIcon, QuestionMarkCircleIcon } from '@heroicons/react/solid'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 
 export default function SlideOver({ open, setOpen, description, setDescription, isPublic, setIsPublic, banner, setBanner }) {
 
@@ -41,7 +40,7 @@ export default function SlideOver({ open, setOpen, description, setDescription, 
 														<span className="sr-only">
 															Close panel
 														</span>
-														<XIcon
+														<XMarkIcon
 															className="w-6 h-6"
 															aria-hidden="true"
 														/>

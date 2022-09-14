@@ -1,10 +1,11 @@
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { SearchIcon } from '@heroicons/react/solid';
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { signIn, signOut } from "next-auth/react";
 import DarkModeToggle from "../darkmode-toggle";
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -55,7 +56,7 @@ function Navbar({ user }) {
 									</label>
 									<div className="relative">
 										<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-											<SearchIcon
+											<MagnifyingGlassIcon
 												className="w-5 h-5 text-gray-400"
 												aria-hidden="true"
 											/>
@@ -78,12 +79,12 @@ function Navbar({ user }) {
 										Open main menu
 									</span>
 									{open ? (
-										<XIcon
+										<XMarkIcon
 											className="block w-6 h-6"
 											aria-hidden="true"
 										/>
 									) : (
-										<MenuIcon
+										<Bars3Icon
 											className="block w-6 h-6"
 											aria-hidden="true"
 										/>

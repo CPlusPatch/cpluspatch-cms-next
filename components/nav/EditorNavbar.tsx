@@ -1,12 +1,12 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { DocumentTextIcon, CogIcon, BellIcon } from "@heroicons/react/solid";
-import { ServerIcon, TrashIcon } from "@heroicons/react/outline";
+import { Menu, Transition } from "@headlessui/react";
+import { ServerIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { CogIcon, DocumentTextIcon } from "@heroicons/react/24/solid";
 import { signIn, signOut } from "next-auth/react";
-import DarkModeToggle from "../darkmode-toggle";
+import { Fragment } from "react";
 import SecondaryButton from "../buttons/SecondaryButton";
-import WhiteButton from "../buttons/WhiteButton";
+import DarkModeToggle from "../darkmode-toggle";
 import Spinner from "../spinners/Spinner";
+import { Toolbar } from "./Toolbar";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -19,6 +19,7 @@ function EditorNavbar({
 	onTitleChange,
 	title,
 	setSidebarOpen,
+	editor
 }) {
 	return (
 		<nav className="bg-white darkfalse:bg-slate-900 shadow sticky backdrop-filter backdrop-blur-lg bg-opacity-30 top-0 z-50 font-['Inter']">
@@ -26,12 +27,15 @@ function EditorNavbar({
 				<div className="flex justify-between h-16">
 					<div className="flex px-2 lg:px-0">
 						<div className="flex items-center flex-shrink-0">
-							<SecondaryButton onClick={() => {
-								if (!isSaving) onSave();
-							}} size="3" className="items-center w-28">
+							<SecondaryButton
+								onClick={() => {
+									if (!isSaving) onSave();
+								}}
+								size="3"
+								className="items-center w-28">
 								{isSaving ? (
 									<span className="flex flex-row">
-										<Spinner className="w-5 h-5 mr-3 -ml-1 fill-blue-600"/>
+										<Spinner className="w-5 h-5 mr-3 -ml-1 fill-blue-600" />
 										Saving
 									</span>
 								) : (
@@ -66,6 +70,7 @@ function EditorNavbar({
 								/>
 							</div>
 						</div>
+						<Toolbar editor={editor}/>
 					</div>
 					<div className="hidden gap-3 lg:ml-4 lg:flex lg:items-center">
 						<button
@@ -77,37 +82,32 @@ function EditorNavbar({
 							<span className="sr-only">
 								Open project settings
 							</span>
-							<CogIcon
-								className="w-6 h-6"
-								aria-hidden="true"
-							/>
+							<CogIcon className="w-6 h-6" aria-hidden="true" />
 						</button>
 						<button
 							type="button"
 							disabled={true}
 							className="flex-shrink-0 p-1 text-gray-400 rounded-full hover:text-gray-500 focus:outline-none disabled:text-gray-200 disabled:darkfalse:text-gray-700">
-							<span className="sr-only">
-								Delete project
-							</span>
-							<TrashIcon
-								className="w-6 h-6"
-								aria-hidden="true"
-							/>
+							<span className="sr-only">Delete project</span>
+							<TrashIcon className="w-6 h-6" aria-hidden="true" />
 						</button>
 
-						<DarkModeToggle/>
-						
-						<Menu
-							as="div"
-							className="relative flex-shrink-0 ml-4">
+						<DarkModeToggle />
+
+						<Menu as="div" className="relative flex-shrink-0 ml-4">
 							<div>
 								<Menu.Button className="flex text-sm bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
 									<span className="sr-only">
 										Open user menu
 									</span>
+									{/* eslint-disable-next-line @next/next/no-img-element */}
 									<img
 										className="w-8 h-8 rounded-md"
-										src={user ? user.image : "https://gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"}
+										src={
+											user
+												? user.image
+												: "https://gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y"
+										}
 										alt=""
 										width={32}
 										height={32}
@@ -122,67 +122,69 @@ function EditorNavbar({
 								leave="transition ease-in duration-75"
 								leaveFrom="transform opacity-100 scale-100"
 								leaveTo="transform opacity-0 scale-95">
-								{user ?
-								<Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-									<Menu.Item>
-										{({ active }) => (
-											<a
-												href="#"
-												className={classNames(
-													active
-														? "bg-gray-100"
-														: "",
-													"block px-4 py-2 text-sm text-gray-700"
-												)}>
-												Your Profile
-											</a>
-										)}
-									</Menu.Item>
-									<Menu.Item>
-										{({ active }) => (
-											<a
-												href="#"
-												className={classNames(
-													active
-														? "bg-gray-100"
-														: "",
-													"block px-4 py-2 text-sm text-gray-700"
-												)}>
-												Settings
-											</a>
-										)}
-									</Menu.Item>
-									<Menu.Item>
-										{({ active }) => (
-											<button
-												onClick={() => signOut()}
-												className={classNames(
-													active
-														? "bg-gray-100"
-														: "",
-													"block px-4 py-2 text-sm text-gray-700 w-full text-left"
-												)}>
-												Sign out
-											</button>
-										)}
-									</Menu.Item>
-								</Menu.Items> :
-								<Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-									<Menu.Item>
-										{({ active }) => (
-											<button
-												onClick={() => signIn()}
-												className={classNames(
-													active
-														? "bg-gray-100"
-														: "",
-													"block px-4 py-2 text-sm text-gray-700 w-full text-left"
-												)}>
-												Sign in
-											</button>
-										)}
-									</Menu.Item>
-								</Menu.Items>}
+								{user ? (
+									<Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+										<Menu.Item>
+											{({ active }) => (
+												<a
+													href="#"
+													className={classNames(
+														active
+															? "bg-gray-100"
+															: "",
+														"block px-4 py-2 text-sm text-gray-700"
+													)}>
+													Your Profile
+												</a>
+											)}
+										</Menu.Item>
+										<Menu.Item>
+											{({ active }) => (
+												<a
+													href="#"
+													className={classNames(
+														active
+															? "bg-gray-100"
+															: "",
+														"block px-4 py-2 text-sm text-gray-700"
+													)}>
+													Settings
+												</a>
+											)}
+										</Menu.Item>
+										<Menu.Item>
+											{({ active }) => (
+												<button
+													onClick={() => signOut()}
+													className={classNames(
+														active
+															? "bg-gray-100"
+															: "",
+														"block px-4 py-2 text-sm text-gray-700 w-full text-left"
+													)}>
+													Sign out
+												</button>
+											)}
+										</Menu.Item>
+									</Menu.Items>
+								) : (
+									<Menu.Items className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+										<Menu.Item>
+											{({ active }) => (
+												<button
+													onClick={() => signIn()}
+													className={classNames(
+														active
+															? "bg-gray-100"
+															: "",
+														"block px-4 py-2 text-sm text-gray-700 w-full text-left"
+													)}>
+													Sign in
+												</button>
+											)}
+										</Menu.Item>
+									</Menu.Items>
+								)}
 							</Transition>
 						</Menu>
 					</div>
@@ -192,28 +194,4 @@ function EditorNavbar({
 	);
 }
 
-/* function EditorNavbar({
-	user,
-	onSave,
-	isSaving,
-	onTitleChange,
-	title,
-	setSidebarOpen,
-}) {
-	return (
-		<header className="flex items-center justify-between p-3 shadow-sm">
-			<span>
-				<DocumentTextIcon className="w-auto h-16"/>
-			</span>
-			<div className="flex-grow">
-				<h2>Sus</h2>
-				<div className="flex items-center h-8 space-x-1 text-sm text-gray-600">
-					<button>Project preferences</button>
-				</div>
-			</div>
-		</header>
-	);
-} */
-
 export default EditorNavbar;
-

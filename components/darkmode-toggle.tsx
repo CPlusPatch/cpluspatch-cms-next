@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Switch } from '@headlessui/react';
-import { MoonIcon, SunIcon } from '@heroicons/react/solid';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import Cookies from "js-cookie";
 
 function classNames(...classes) {
@@ -13,7 +13,8 @@ export default function Example() {
 
 	useEffect(() => {
 		const enabled = Cookies.get("theme") === "dark";
-		setEnabled(enabled);
+		//setEnabled(enabled);
+		setEnabled(false);
 	}, []);
 
   	const toggle = () => {
@@ -24,11 +25,11 @@ export default function Example() {
 
   return (
 		<Switch
-			checked={enabled}
-			onChange={toggle}
+			checked={/*enabled*/false}
+			/* onChange={toggle} */
 			className={classNames(
 				enabled ? "bg-indigo-600" : "bg-yellow-400",
-				"relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none"
+				"relative opacity-50 inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none"
 			)}>
 			<span className="sr-only">Use setting</span>
 			<span

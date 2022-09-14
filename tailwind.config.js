@@ -6,7 +6,13 @@ module.exports = {
 		"./components/**/*.{js,ts,jsx,tsx}",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				cyber: ["Blender Pro Bold", "sans-serif"],
+				exo: ["'Exo 2'", "sans-serif"],
+				cygun: ["Cygun Regular", "sans-serif"]
+			}
+		},
 		nightwind: {
 			typography: true
 		}
@@ -14,6 +20,5 @@ module.exports = {
 	plugins: [
 		require("@tailwindcss/typography"),
 		require("@tailwindcss/aspect-ratio"),
-		require("nightwind"),
 	],
 }
