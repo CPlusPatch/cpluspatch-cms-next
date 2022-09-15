@@ -52,7 +52,9 @@ const Footer = () => {
 	return (
 		<footer className="">
 			<div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
-				<div id="socials" className="flex justify-center space-x-6 md:order-2 focus:ring-1 ring-blue-500">
+				<div
+					id="socials"
+					className="flex justify-center space-x-6 md:order-2 focus:ring-1 ring-blue-500">
 					{socials.map((item) => {
 						return (
 							<a
@@ -62,14 +64,17 @@ const Footer = () => {
 								<span className="sr-only">{item.name}</span>
 								{item.icon}
 							</a>
-						)})}
+						);
+					})}
 				</div>
 				<div className="mt-8 md:mt-0 md:order-1">
 					<p className="text-base text-center text-gray-400">
-						&copy; {new Date().getFullYear()} {branding.authorName}. All rights reserved.
+						&copy; {new Date().getFullYear()} {branding.authorName}.
+						All rights reserved.
 					</p>
 				</div>
 			</div>
+			<a rel="me" className="sr-only" href="https://social.linux.pizza/@CPlusPatch">link for mastodon verification</a>
 		</footer>
 	);
 }
