@@ -8,9 +8,9 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				cyber: ["Blender Pro Bold", "sans-serif"],
 				exo: ["'Exo 2'", "sans-serif"],
-				cygun: ["Cygun Regular", "sans-serif"]
+				openSans: ["'Open Sans'", "sans-serif"],
+				inter: ["'Inter'", "sans-serif"]
 			}
 		},
 		nightwind: {

@@ -8,7 +8,7 @@ import { Aside } from '../../components/blog/Aside';
 
 function Article({ post, user }: {
 	post: any
-	user: object
+	user: UserSession["user"];
 }) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">

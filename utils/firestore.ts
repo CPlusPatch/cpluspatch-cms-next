@@ -2,6 +2,7 @@ import admin from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../pages/api/auth/[...nextauth]";
+import { Post, UserSession } from "../types/types";
 
 // Initialize Firebase
 if (!admin.apps.length) {
@@ -25,7 +26,7 @@ const methods = {
 	db: db,
 	postsRef: postsRef,
 	usersRef: usersRef,
-	getPosts: async (fields: any[] | boolean = false) => {
+	getPosts: async (fields: any[] | boolean = false): Promise<Array<Post> | false> => {
 		let posts = [];
 		let data = fields ? 
 			await postsRef.where(fields[0], fields[1], fields[2]).orderBy("dateLastEdited", "desc").get() :
@@ -91,7 +92,7 @@ const methods = {
 			return false;
 		}
 	},
-	getUserById: async (id) => {
+	getUserById: async (id): Promise<UserSession | null> => {
 		try {
 			let data = await usersRef.doc(id).get();
 			let user = {
@@ -101,10 +102,10 @@ const methods = {
 			return JSON.parse(JSON.stringify(user)); // Still don't know why it needs this JSOthing but it does
 		} catch (error) {
 			console.log(error)
-			return false;
+			return null;
 		}
 	},
-	getCurrentUser: async (req, res) => {
+	getCurrentUser: async (req, res): Promise<UserSession | null> => {
 		return JSON.parse(JSON.stringify(await unstable_getServerSession(req, res, authOptions))); // IT REFUSES TO WORK WITHOUT THAT JSON THING AGHHHAGHGAGAHAH
 	},
 }

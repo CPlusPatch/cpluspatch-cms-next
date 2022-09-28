@@ -30,7 +30,7 @@ a {
 	margin-bottom: 0;
 }
 
-.prose :where(h1,h2,h3,h4,h5,h6):not(:where([class~=\"not-prose\"] *)) {
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~=\"not-prose\"] *)) {
 	color: inherit;
 }
 
@@ -66,17 +66,54 @@ a {
 	animation: leave .15s ease-in forwards
 }
 
+/* exo-2-regular - latin */
 @font-face {
-	font-family: "Blender Pro Bold";
-	src: url("../public/assets/fonts/Blender-Pro-Bold.ttf");
+	font-family: 'Exo 2';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local(''),
+		url('/fonts/exo-2-v20-latin-regular.woff2') format('woff2'),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */
+		url('/fonts/exo-2-v20-latin-regular.woff') format('woff');
+	/* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+/* exo-2-900 - latin */
 @font-face {
-	font-family: "Cygun Regular";
-	src: url("../public/assets/fonts/CYGUN-Regular.ttf");
+	font-family: 'Exo 2';
+	font-style: normal;
+	font-weight: 900;
+	font-display: swap;
+	src: local(''),
+		url('/fonts/exo-2-v20-latin-900.woff2') format('woff2'),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */
+		url('/fonts/exo-2-v20-latin-900.woff') format('woff');
+	/* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-.cyber-btn-clip:after, .cyber-btn-clip:before {
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 70%);
+/* inter-regular - latin */
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local(''),
+		url('/fonts/inter-v12-latin-regular.woff2') format('woff2'),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */
+		url('/fonts/inter-v12-latin-regular.woff') format('woff');
+	/* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
 
+/* open-sans-regular - latin */
+@font-face {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local(''),
+		url('/fonts/open-sans-v34-latin-regular.woff2') format('woff2'),
+		/* Chrome 26+, Opera 23+, Firefox 39+ */
+		url('/fonts/open-sans-v34-latin-regular.woff') format('woff');
+	/* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
