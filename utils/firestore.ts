@@ -92,7 +92,7 @@ const methods = {
 			return false;
 		}
 	},
-	getUserById: async (id): Promise<UserSession | null> => {
+	getUserById: async (id): Promise<UserSession["user"] | null> => {
 		try {
 			let data = await usersRef.doc(id).get();
 			let user = {

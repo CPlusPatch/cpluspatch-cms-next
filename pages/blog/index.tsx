@@ -128,11 +128,11 @@ function Post({ posts }) {
 							backgroundImage:
 								"linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0,0,0,0) 176px)",
 						}}>
-						<div className="flex flex-col justify-end h-full p-5 text-left">
+						<div className="flex flex-col justify-end h-full p-5 text-left gap-y-1">
 							<h2 className="text-3xl font-bold text-gray-200 font-openSans">
 								{posts[0].data.title}
 							</h2>
-							<h4 className="text-gray-400 text-md font-inter overflow-ellipsis">
+							<h4 className="font-sans text-gray-400 text-md overflow-ellipsis">
 								{posts[0].data.description}
 							</h4>
 						</div>
@@ -215,7 +215,7 @@ export const getServerSideProps = async ({ req, res }) => {
 	if (posts) {
 		posts = await Promise.all(
 			posts.map(async (post) => {
-				post.user = (await firestore.getUserById(post.data.author)).user;
+				post.user = await firestore.getUserById(post.data.author);
 				return post;
 			})
 		);
