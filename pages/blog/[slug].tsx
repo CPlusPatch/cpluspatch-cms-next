@@ -5,10 +5,11 @@ import Navbar from '../../components/nav/navbar';
 import Blocks from "editorjs-blocks-react-renderer";
 import firestore from "../../utils/firestore";
 import { Aside } from '../../components/blog/Aside';
+import { User } from '../../types/types';
 
 function Article({ post, user }: {
 	post: any
-	user: UserSession["user"];
+	user: User;
 }) {
 	return (
 		<div className="bg-gray-50 font-['Exo_2'] w-full min-h-screen">

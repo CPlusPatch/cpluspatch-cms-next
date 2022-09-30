@@ -7,13 +7,14 @@ import firestore from "../../utils/firestore";
 import githubLogo from "../../public/static/github-black.svg";
 import discordLogo from "../../public/static/discord.png";
 import loginHero from "../../public/static/login-hero.jpg";
+import { User } from "../../types/types";
 
 const providerLogos = {
 	GitHub: githubLogo,
 	Discord: discordLogo,
 };
 0
-export default function SignIn({ providers, user }: { providers: Record<any, any>; user: object }) {
+export default function SignIn({ providers, user }: { providers: Record<any, any>; user: User }) {
 	return (
 	<div className="bg-gray-50 font-['Exo_2']">
 			<Head>

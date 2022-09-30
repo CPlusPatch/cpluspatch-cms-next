@@ -16,14 +16,13 @@ import githubLogo from '../public/static/github.svg';
 import tailwindLogo from '../public/static/tailwindcss.svg';
 import { Languages } from "../components/landing/Languages";
 import { Faqs } from "../components/landing/Faqs";
-import { ContactHeader } from "../components/landing/ContactHeader";
-import CyberButton from "../components/buttons/CyberButton";
+import { User } from "../types/types";
 
 export function classNames(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
-export default function Landing({ user }) {
+export default function Landing({ user }: { user: User }) {
 	return (
 		<div className="bg-gray-50 dark:bg-[#020918] font-exo duration-200">
 			<Head>

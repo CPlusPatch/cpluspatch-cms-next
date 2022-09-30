@@ -5,7 +5,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { signIn, signOut } from "next-auth/react";
 import DarkModeToggle from "../darkmode-toggle";
-import { NavbarOptions, UserSession } from "../../types/types";
+import { NavbarOptions, User } from "../../types/types";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -17,7 +17,7 @@ function Navbar({
 		showSearchBar: true,
 	},
 }: {
-	user: UserSession["user"];
+	user: User;
 	options?: NavbarOptions;
 }) {
 	return (

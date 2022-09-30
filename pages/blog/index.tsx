@@ -5,16 +5,16 @@ import Navbar from "../../components/nav/navbar";
 import firestore from "../../utils/firestore";
 import { useRouter } from "next/router";
 import { PlusIcon } from "@heroicons/react/24/solid";
-import { UserSession } from "../../types/types";
+import { Post, Posts, User } from "../../types/types";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
 }
 
 function Main({ posts, user, isAdmin }: {
-	posts: any;
-	user: UserSession["user"];
-	isAdmin: UserSession["user"]["admin"];
+	posts: Posts;
+	user: User;
+	isAdmin: User["admin"];
 }) {
 	return (
 		<div className="w-full min-h-screen duration-200 bg-gray-50">
@@ -48,7 +48,7 @@ function Main({ posts, user, isAdmin }: {
 							</p>
 						</div>
 						<div className="max-w-lg gap-5 mx-auto mt-12 lg:max-w-none">
-							<Post posts={posts} />
+							<Posts posts={posts} />
 						</div>
 					</div>
 				</main>
@@ -57,7 +57,9 @@ function Main({ posts, user, isAdmin }: {
 	);
 }
 
-function Post({ posts }) {
+function Posts({ posts }: {
+	posts: Posts;
+}) {
 	{/* <div className="flex flex-col overflow-hidden rounded-md shadow-lg">
 		<div className="flex-shrink-0 overflow-hidden">
 			<img
@@ -118,6 +120,7 @@ function Post({ posts }) {
 			</div>
 		</div>
 	</div> */}
+	console.log(posts);
 	return (
 		<div>
 			{(posts ?? {}).length > 0 && (
@@ -146,8 +149,8 @@ function Post({ posts }) {
 					</div>
 				</article>
 			)}
-			{posts.slice(2, 5).map((post) => (
-				<>sus</>
+			{(posts ?? {}).map((post) => (
+				<div key={post.data.slug}>sus</div>
 			))}
 		</div>
 	);

@@ -2,7 +2,7 @@ import admin from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../pages/api/auth/[...nextauth]";
-import { Post, UserSession } from "../types/types";
+import { Post, Posts, User, UserSession } from "../types/types";
 
 // Initialize Firebase
 if (!admin.apps.length) {
@@ -26,19 +26,24 @@ const methods = {
 	db: db,
 	postsRef: postsRef,
 	usersRef: usersRef,
-	getPosts: async (fields: any[] | boolean = false): Promise<Array<Post> | false> => {
+	getPosts: async (
+		fields: any[] | boolean = false
+	): Promise<Posts> => {
 		let posts = [];
-		let data = fields ? 
-			await postsRef.where(fields[0], fields[1], fields[2]).orderBy("dateLastEdited", "desc").get() :
-			await postsRef.orderBy("dateLastEdited", "desc").get();
-		
+		let data = fields
+			? await postsRef
+					.where(fields[0], fields[1], fields[2])
+					.orderBy("dateLastEdited", "desc")
+					.get()
+			: await postsRef.orderBy("dateLastEdited", "desc").get();
+
 		data.forEach((doc) => {
 			posts.push({
 				id: doc.id,
-				data: doc.data()
+				data: doc.data(),
 			});
 		});
-		return posts ?? false;
+		return posts ?? {};
 	},
 	getPostByFields: async (...fields: any[]) => {
 		let posts = [];
@@ -46,7 +51,7 @@ const methods = {
 		data.forEach((doc) => {
 			posts.push({
 				id: doc.id,
-				data: doc.data()
+				data: doc.data(),
 			});
 		});
 		return posts ?? false;
@@ -56,19 +61,19 @@ const methods = {
 			let data = await postsRef.doc(id).get();
 			let post = {
 				id: data.id,
-				data: data.data()
+				data: data.data(),
 			};
 
 			return post;
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 			return false;
 		}
 	},
 	setPostField: async (id, field, value) => {
 		try {
 			let data = await postsRef.doc(id).update({
-				[field]: value
+				[field]: value,
 			});
 			return data;
 		} catch {
@@ -86,27 +91,31 @@ const methods = {
 	},
 	addPost: async (data) => {
 		try {
-			return (await postsRef.add(data));
+			return await postsRef.add(data);
 		} catch (error) {
 			console.log(error);
 			return false;
 		}
 	},
-	getUserById: async (id): Promise<UserSession["user"] | null> => {
+	getUserById: async (id): Promise<User | null> => {
 		try {
 			let data = await usersRef.doc(id).get();
 			let user = {
 				id: data.id,
-				data: data.data()
+				data: data.data(),
 			};
 			return JSON.parse(JSON.stringify(user)); // Still don't know why it needs this JSOthing but it does
 		} catch (error) {
-			console.log(error)
+			console.log(error);
 			return null;
 		}
 	},
 	getCurrentUser: async (req, res): Promise<UserSession | null> => {
-		return JSON.parse(JSON.stringify(await unstable_getServerSession(req, res, authOptions))); // IT REFUSES TO WORK WITHOUT THAT JSON THING AGHHHAGHGAGAHAH
+		return JSON.parse(
+			JSON.stringify(
+				await unstable_getServerSession(req, res, authOptions)
+			)
+		); // IT REFUSES TO WORK WITHOUT THAT JSON THING AGHHHAGHGAGAHAH
 	},
-}
+};
 export default methods;

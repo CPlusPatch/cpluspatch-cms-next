@@ -44,3 +44,7 @@ type Post = {
 		updatedAt: string;
 	};
 };
+
+type User = UserSession.User;
+
+type Posts = Post[] | Record<string, never>;
