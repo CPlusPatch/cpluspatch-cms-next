@@ -10,7 +10,8 @@ module.exports = {
 			fontFamily: {
 				exo: ["'Exo 2'", "sans-serif"],
 				openSans: ["'Open Sans'", "sans-serif"],
-				inter: ["'Inter'", "sans-serif"]
+				inter: ["'Inter'", "sans-serif"],
+				metropolis: ["'Metropolis'", "sans-serif"],
 			}
 		},
 		nightwind: {

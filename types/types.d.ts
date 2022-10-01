@@ -34,15 +34,17 @@ type Post = {
 		title: string;
 	};
 	user?: {
-		admin?: boolean;
-		name: string;
-		email: string;
-		image: string;
 		id: string;
-		canCreatePosts: boolean;
-		createdAt: string;
-		updatedAt: string;
-	};
+		data: {
+			admin?: boolean;
+			name: string;
+			email: string;
+			image: string;
+			canCreatePosts: boolean;
+			createdAt: string;
+			updatedAt: string;
+		};
+	}
 };
 
 type User = UserSession.User;

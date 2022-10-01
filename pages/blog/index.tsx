@@ -6,6 +6,7 @@ import firestore from "../../utils/firestore";
 import { useRouter } from "next/router";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { Post, Posts, User } from "../../types/types";
+import Image from "next/future/image";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -28,10 +29,7 @@ function Main({ posts, user, isAdmin }: {
 					showSearchBar: !isAdmin,
 					buttons: isAdmin && (
 						<div>
-							<button className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white duration-300 bg-indigo-600 border border-transparent rounded-[0.2rem] shadow-sm hover:shadow-md hover:bg-indigo-500">
-								<PlusIcon className="w-4 h-4 mr-2"/>
-								New post
-							</button>
+							<NewPostButton/>
 						</div>
 					),
 				}}
@@ -60,71 +58,10 @@ function Main({ posts, user, isAdmin }: {
 function Posts({ posts }: {
 	posts: Posts;
 }) {
-	{/* <div className="flex flex-col overflow-hidden rounded-md shadow-lg">
-		<div className="flex-shrink-0 overflow-hidden">
-			<img
-				className="object-cover w-full h-48"
-				src={post.data.banner || undefined}
-				alt=""
-			/>
-		</div>
-		<div className="flex flex-col justify-between flex-1 p-6 bg-white">
-			<div className="flex-1">
-				<p className="text-sm font-medium tracking-tight text-indigo-600 uppercase font-openSans">
-					<a href="#" className="hover:underline">
-						Article
-					</a>
-				</p>
-				<Link href={`/blog/${post.data.slug}`} prefetch={false}>
-					<a className="block mt-2">
-						<p className="text-xl font-semibold text-gray-900">
-							{post.data.title}
-						</p>
-						<p className="mt-3 text-base text-gray-500">
-							{post.data.description}
-						</p>
-					</a>
-				</Link>
-				<Link href={"/editor/" + post.id}>
-					<a className="flex flex-row items-center mt-4 text-sm">
-						Edit{" "}
-						<ChevronRightIcon className="w-3 h-3 align-baseline" />
-					</a>
-				</Link>
-			</div>
-			<div className="flex items-center mt-6">
-				<div className="flex-shrink-0">
-					<a href="#">
-						<span className="sr-only">
-							{post.user.data.name}
-						</span>
-						<img
-							className="w-10 h-10 rounded-full"
-							src={post.user.data.image}
-							alt=""
-						/>
-					</a>
-				</div>
-				<div className="ml-3">
-					<p className="text-sm font-medium text-gray-900">
-						<a href="#" className="hover:underline">
-							{post.user.data.name}
-						</a>
-					</p>
-					<div className="flex space-x-1 text-sm text-gray-500">
-						<time dateTime={post.data.dateLastEdited}>
-							{moment(post.data.dateLastEdited).fromNow()}
-						</time>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> */}
-	console.log(posts);
 	return (
-		<div>
+		<div className="grid grid-cols-2 gap-4 h-72">
 			{(posts ?? {}).length > 0 && (
-				<article className="relative flex w-1/2 overflow-hidden duration-300 rounded-md shadow-md h-72 hover:scale-[100.5%]">
+				<article className="relative flex w-full overflow-hidden duration-300 rounded-md shadow-md h-72 hover:scale-[100.5%]">
 					<div
 						className="absolute inset-0 z-10 flex"
 						style={{
@@ -141,24 +78,59 @@ function Posts({ posts }: {
 						</div>
 					</div>
 					<div className="absolute inset-0 left-0 w-full h-full overflow-hidden">
-						<img
+						<Image
 							src={posts[0].data.banner || undefined}
 							className="min-w-full min-h-full"
 							alt=""
+							width={550}
+							height={290}
 						/>
 					</div>
 				</article>
 			)}
-			{(posts ?? {}).map((post) => (
-				<div key={post.data.slug}>sus</div>
-			))}
+			<div className="grid grid-flow-row-dense grid-cols-2 grid-rows-3 gap-2 h-72">
+				{(posts ?? {}).slice(1, 7).map((post) => (
+					<article
+						key={post.id}
+						className="relative grid grid-cols-5 overflow-hidden duration-300 rounded-md shadow-md hover:scale-[100.5%] w-full">
+						<div className="col-span-2 m-3 overflow-hidden rounded-[0.275rem] flex items-center justify-center">
+							<Image
+								className="object-cover min-w-full min-h-full"
+								src={post.data.banner || undefined}
+								alt=""
+								width={84}
+								height={75}/>
+						</div>
+						<div className="flex flex-col items-start col-span-3 py-3 pr-3 leading-tight font-metropolis">
+							<h2 className="font-medium text-md">
+								{post.data.title}
+							</h2>
+							<span className="flex flex-row items-center mt-auto overflow-hidden text-sm ">
+								<img
+									src={post.user.data.image || undefined}
+									alt=""
+									className="w-4 h-4 mr-2 rounded-sm"
+								/>
+								<h5 className="overflow-hidden text-ellipsis whitespace-nowrap">
+									{post.user.data.name || undefined}
+								</h5>
+							</span>
+						</div>
+					</article>
+				))}
+			</div>
 		</div>
 	);
 }
 
-function Header({ isAdmin }) {
+function NewPostButton() {
 	const router = useRouter();
-	const [buttonContents, setButtonContents] = useState(<>New post</>);
+	const [buttonContents, setButtonContents] = useState(
+		<>
+			<PlusIcon className="w-4 h-4 mr-2" />
+			New post
+		</>
+	);
 
 	const createNewPost = async () => {
 		setButtonContents(
@@ -183,27 +155,12 @@ function Header({ isAdmin }) {
 		router.push(`/editor/${post.id}`);
 	};
 	return (
-		<div className="items-center justify-between block pt-6 pb-8 space-y-2 md:flex md:space-y-5">
-			<div>
-				<h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-					Recent publications
-				</h1>
-				<p className="mt-2 text-lg leading-7 text-gray-800">
-					The latest crap written directly served to you by the
-					wonderful invention called the Internet
-				</p>
-			</div>
-			<div>
-				{isAdmin && (
-					<button
-						onClick={createNewPost}
-						type="button"
-						className="inline-flex items-center px-3 py-2 mt-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm md:mt-0 md:ml-3 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-						{buttonContents}
-					</button>
-				)}
-			</div>
-		</div>
+		<button
+			onClick={createNewPost}
+			type="button"
+			className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-white duration-300 bg-indigo-600 border border-transparent rounded-[0.2rem] shadow-sm hover:shadow-md hover:bg-indigo-500">
+			{buttonContents}
+		</button>
 	);
 }
 

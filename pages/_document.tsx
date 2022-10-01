@@ -4,7 +4,8 @@ import Cookies from 'cookies';
 export default function MyDocument(/* { props } */) {
 	return (
     <Html lang='en-us' /* className={props.isDarkTheme ? "dark" : ""} */>
-		<Head></Head>
+		<Head>
+		</Head>
 
 		<body>
 			<Main />
