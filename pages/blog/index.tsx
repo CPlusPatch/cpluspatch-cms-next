@@ -82,8 +82,9 @@ function Posts({ posts }: {
 							src={posts[0].data.banner || undefined}
 							className="min-w-full min-h-full"
 							alt=""
-							width={550}
-							height={290}
+							sizes="548px"
+							width={548}
+							height={288}
 						/>
 					</div>
 				</article>
@@ -98,8 +99,10 @@ function Posts({ posts }: {
 								className="object-cover min-w-full min-h-full"
 								src={post.data.banner || undefined}
 								alt=""
+								sizes="84px"
 								width={84}
-								height={75}/>
+								height={75}
+								/>
 						</div>
 						<div className="flex flex-col items-start col-span-3 py-3 pr-3 leading-tight font-metropolis">
 							<h2 className="font-medium text-md">
