@@ -15,9 +15,13 @@ const nextConfig = {
 			},
 			{
 				protocol: "https",
-				hostname: "i.redd.it"
-			}
+				hostname: "i.redd.it",
+			},
 		],
+		deviceSizes: [
+			200, 640, 750, 828, 1080, 1200, 1920, 2048, 2400, 2800, 3200, 3840,
+		],
+		formats: ["image/avif", "image/webp"],
 	},
 };
 

@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { Post, Posts, User } from "../../types/types";
 import Image from "next/future/image";
+import imageKitLoader from "../../utils/image-kit";
+import Shimmer from "../../components/images/shimmer-imagekit";
 
 function classNames(...classes) {
 	return classes.filter(Boolean).join(" ");
@@ -78,13 +80,13 @@ function Posts({ posts }: {
 						</div>
 					</div>
 					<div className="absolute inset-0 left-0 w-full h-full overflow-hidden">
-						<Image
+						<Shimmer
 							src={posts[0].data.banner || undefined}
-							className="min-w-full min-h-full"
+							className="object-cover min-w-full min-h-full"
 							alt=""
-							sizes="548px"
-							width={548}
-							height={288}
+							sizes="550px"
+							width={0}
+							height={0}
 						/>
 					</div>
 				</article>
@@ -94,15 +96,15 @@ function Posts({ posts }: {
 					<article
 						key={post.id}
 						className="relative grid grid-cols-5 overflow-hidden duration-300 rounded-md shadow-md hover:scale-[100.5%] w-full">
-						<div className="col-span-2 m-3 overflow-hidden rounded-[0.275rem] flex items-center justify-center">
-							<Image
+						<div className="relative col-span-2 m-3 overflow-hidden rounded-[0.275rem] flex items-center justify-center max-w-[100px]">
+							<Shimmer
 								className="object-cover min-w-full min-h-full"
 								src={post.data.banner || undefined}
 								alt=""
 								sizes="84px"
-								width={84}
-								height={75}
-								/>
+								width={0}
+								height={0}
+							/>
 						</div>
 						<div className="flex flex-col items-start col-span-3 py-3 pr-3 leading-tight font-metropolis">
 							<h2 className="font-medium text-md">
